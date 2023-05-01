@@ -7,7 +7,7 @@ import CoupleYelp from './pages/CoupleYelp';
 
 const App = () => {
   return (
-    <Container sx={{ my: 4}}>
+    <Container sx={{ my: 4 }}>
       <CoupleYelp />
     </Container>
   );
