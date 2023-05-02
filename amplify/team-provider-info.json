@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-lighthallcoupleyelp-dev-103814-authRole",
+      "UnauthRoleArn": "arn:aws:iam::810036735283:role/amplify-lighthallcoupleyelp-dev-103814-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::810036735283:role/amplify-lighthallcoupleyelp-dev-103814-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-lighthallcoupleyelp-dev-103814-deployment",
+      "UnauthRoleName": "amplify-lighthallcoupleyelp-dev-103814-unauthRole",
+      "StackName": "amplify-lighthallcoupleyelp-dev-103814",
+      "StackId": "arn:aws:cloudformation:us-east-2:810036735283:stack/amplify-lighthallcoupleyelp-dev-103814/f9ac2240-e8f6-11ed-91f2-0a0b7b681225",
+      "AmplifyAppId": "d31kctbuv485tm"
+    },
+    "categories": {
+      "auth": {
+        "lighthallcoupleyelpc19f6ab8": {}
+      }
+    }
+  }
+}

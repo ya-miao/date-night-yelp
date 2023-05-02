@@ -1,10 +1,16 @@
 import './App.css';
-
 import axios from 'axios'
 
 import { Container } from '@mui/material';
 
 import CoupleYelp from './pages/CoupleYelp';
+
+import { Amplify } from 'aws-amplify';
+import { Authenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
 
 const App = () => {
 
@@ -32,7 +38,11 @@ const App = () => {
 
   return (
     <Container sx={{ my: 4 }}>
-      <CoupleYelp />
+      <Authenticator >
+        {({ signOut, user }) => (
+          <CoupleYelp />
+        )}
+      </Authenticator>
     </Container>
   );
 };
