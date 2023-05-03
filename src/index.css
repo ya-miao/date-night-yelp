@@ -1,5 +1,10 @@
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +15,16 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+:root {
+  --purple-color: #A64AC9;
+  --blue-purple-color: #473890;
+  --light-gray: #E5E9E7;
+  --testing-light-gray: #E9E6E6;
+}
+
+.title-section img {
+  width: 15rem;
+  height: 15rem;
 }

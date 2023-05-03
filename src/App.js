@@ -44,12 +44,11 @@ const App = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      style={{ minHeight: '100vh' }}
     >
       <Grid item>
         <Authenticator >
           {({ signOut, user }) => (
-            <Box sx={{ m: 4 }}>
+            <Box sx={{width: "100%"}}>
               <CoupleYelp />
             </Box>
           )}
