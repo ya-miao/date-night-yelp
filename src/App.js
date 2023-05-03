@@ -1,7 +1,7 @@
 import './App.css';
 import axios from 'axios'
 
-import { Container } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
 
 import CoupleYelp from './pages/CoupleYelp';
 
@@ -37,13 +37,26 @@ const App = () => {
   //
 
   return (
-    <Container sx={{ my: 4 }}>
-      <Authenticator >
-        {({ signOut, user }) => (
-          <CoupleYelp />
-        )}
-      </Authenticator>
-    </Container>
+    // <Container sx={{ my: 4 }}>
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+      style={{ minHeight: '100vh' }}
+    >
+      <Grid item>
+        <Authenticator >
+          {({ signOut, user }) => (
+            <Box sx={{ m: 4 }}>
+              <CoupleYelp />
+            </Box>
+          )}
+        </Authenticator>
+      </Grid>
+    </Grid>
+    // </Container>
   );
 };
 
