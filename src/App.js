@@ -15,14 +15,14 @@ Amplify.configure(awsExports);
 
 const App = () => {
 
-  const [ configParams, setConfigParams ] = useState({
+  const [configParams, setConfigParams] = useState({
     term: "restaurants",
     location: 'NYC',
     sort_by: "best_match",
     limit: 10,
   });
 
-  const [ restaurantResults, setRestaurantResults ] = useState([]);
+  const [restaurantResults, setRestaurantResults] = useState([]);
 
   // Example working API call. We can work off of this base.
   const config = {
@@ -62,11 +62,11 @@ const App = () => {
       alignItems="center"
       justifyContent="center"
     >
-      <Grid item>
+      <Grid item sx={{ width: "100%" }}>
         <Authenticator >
           {({ signOut, user }) => (
-            <Box sx={{ width: "100%" }}>
-              <CoupleYelp callYelpApi={callYelpApi} setConfigParams={setConfigParams} restaurantResults={restaurantResults}/>
+            <Box>
+              <CoupleYelp callYelpApi={callYelpApi} setConfigParams={setConfigParams} restaurantResults={restaurantResults} />
             </Box>
           )}
         </Authenticator>

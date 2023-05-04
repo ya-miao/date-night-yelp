@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +13,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--pastel-light-blue);
 }
 
 code {
@@ -19,12 +23,17 @@ code {
 
 :root {
   --purple-color: #A64AC9;
+  --purple-color2: #eecdfb;
   --blue-purple-color: #473890;
+  --blue-purple-color2: #d7cffc;
   --light-gray: #E5E9E7;
   --testing-light-gray: #E9E6E6;
+  --light-blue: #C8EFF9;
+  --pastel-light-blue: #C1C8E4;
+  --off-black: #342C34
 }
 
 .title-section img {
-  width: 15rem;
-  height: 15rem;
+  width: 9rem;
+  height: 9rem;
 }
