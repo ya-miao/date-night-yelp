@@ -18,15 +18,7 @@ const App = () => {
   const [maxDistance, setMaxDistance] = useState(15);
   const [category, setCategory] = useState('');
   const [priceLevel, setPriceLevel] = useState(2);
-
-  // const [configParams, setConfigParams] = useState({
-  //   term: "restaurants",
-  //   location: 'NYC',
-  //   sort_by: "best_match",
-  //   limit: 10,
-  //   radius: maxDistance * 1609,
-  //   price: priceLevel
-  // });
+  const [userLocation, setUserLocation] = useState([]);
 
   const configParams = {
     term: "restaurants",
@@ -64,10 +56,28 @@ const App = () => {
   };
   //
 
+  const getUserLocation = async () => {
+    const success = async (position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`);
+      const jsonData = await response.json();
+      setUserLocation(jsonData);
+    }
+
+    const error = () => {
+      console.log("Mission Failed")
+    };
+
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
+
   useEffect(() => {
     console.log('restaurantResults: ');
     console.log(restaurantResults);
-  }, [restaurantResults])
+    console.log(userLocation, "userLocation");
+  }, [restaurantResults, userLocation])
 
   useEffect(() => {
     console.log('priceLevel: ');
@@ -78,6 +88,11 @@ const App = () => {
     console.log('maxDistance: ');
     console.log(maxDistance);
   }, [maxDistance])
+
+  useEffect(() => {
+    getUserLocation();
+  }, [])
+
 
   return (
     <Grid
@@ -91,7 +106,7 @@ const App = () => {
         <Authenticator >
           {({ signOut, user }) => (
             <Box>
-              <CoupleYelp callYelpApi={callYelpApi} restaurantResults={restaurantResults} setMaxDistance={setMaxDistance} setCategory={setCategory} setPriceLevel={setPriceLevel} />
+              <CoupleYelp callYelpApi={callYelpApi} restaurantResults={restaurantResults} setMaxDistance={setMaxDistance} setCategory={setCategory} setPriceLevel={setPriceLevel} location={userLocation}/>
             </Box>
           )}
         </Authenticator>

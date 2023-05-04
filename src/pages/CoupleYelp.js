@@ -10,7 +10,7 @@ import ResultsDialog from '../components/ResultsDialog';
 
 // Let's add some way for users to input person 1 and person 2
 // We also need to take into account preferences from both person 1 and 2 separately
-const CoupleYelp = ({ callYelpApi, restaurantResults, setMaxDistance, setCategory, setPriceLevel }) => {
+const CoupleYelp = ({ callYelpApi, restaurantResults, setMaxDistance, setCategory, setPriceLevel, location }) => {
   const signOut = async () => {
     try {
       await Auth.signOut();
@@ -27,9 +27,9 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setMaxDistance, setCategor
 
   return (
     <Stack mb={4}>
-      <Stack direction='row' justifyContent='space-between' sx={{ backgroundColor: "#28282B", color: orange[500] }} padding={1}>
+      <Stack direction='row' justifyContent='space-between' sx={{ backgroundColor: "#28282B", padding: "0.5rem 2rem"}}>
         <Stack direction='row' alignItems='center' justifyContent='center' gap={1}>
-          <Typography>Current Location: NYC</Typography>
+          <Typography style={{color: "white"}}>Current Location: <span style={{color: "orange"}}>{location.principalSubdivision}</span></Typography>
           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="15" height="15" viewBox="0 0 24 24" stroke-width="1.5" stroke={orange[500]} fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <circle cx="12" cy="11" r="3" />
