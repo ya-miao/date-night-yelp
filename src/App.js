@@ -45,10 +45,10 @@ const App = () => {
       alignItems="center"
       justifyContent="center"
     >
-      <Grid item>
+      <Grid item sx={{width: "100%"}}>
         <Authenticator >
           {({ signOut, user }) => (
-            <Box sx={{width: "100%"}}>
+            <Box>
               <CoupleYelp />
             </Box>
           )}

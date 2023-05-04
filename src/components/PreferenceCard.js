@@ -3,7 +3,7 @@ import { Box, Card, CardContent, InputLabel, MenuItem, FormControl, Select, Slid
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { orange, yellow } from '@mui/material/colors';
 
-const PreferenceCard = ({ oneUser, color }) => {
+const PreferenceCard = ({ oneUser, mainColor, secColor }) => {
   const marks = [
     {
       value: 1,
@@ -42,9 +42,17 @@ const PreferenceCard = ({ oneUser, color }) => {
 
   return (
     <Box sx={{ width: '75vh' }}>
-      <Stack spacing={2} sx={{ mx: 2 }}>
-        <Typography variant='overline'>{oneUser}</Typography>
-        <Card style={{ backgroundColor: color, color: "white" }}>
+      <Stack sx={{ mx: 2 }}>
+        <Stack direction='row' alignItems='center' justifyContent='center' gap={1}>
+          <Typography fontFamily="Poppins" fontWeight="bold">{oneUser}</Typography>
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke={mainColor} fill={secColor} stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="12" cy="12" r="9" />
+            <circle cx="12" cy="10" r="3" />
+            <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+          </svg>
+        </Stack>
+        <Card style={{ backgroundColor: mainColor, color: "white" }}>
           {/* <Card> */}
           <CardContent>
             <ThemeProvider theme={theme}>
@@ -69,7 +77,7 @@ const PreferenceCard = ({ oneUser, color }) => {
                         value={category}
                         label="Category"
                         onChange={handleChange}
-                        sx={{color: orange[500]}}
+                        sx={{ color: orange[500] }}
                       >
                         <MenuItem value='Sushi'>Sushi</MenuItem>
                         <MenuItem value='Mexican'>Mexican</MenuItem>
