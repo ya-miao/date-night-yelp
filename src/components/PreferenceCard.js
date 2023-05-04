@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { Box, Card, CardContent, InputLabel, MenuItem, FormControl, Select, Slider, Stack, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { orange, yellow } from '@mui/material/colors';
+import React, {useState, useRef} from "react"
 
 const PreferenceCard = ({ oneUser, color }) => {
   const marks = [
@@ -24,6 +24,20 @@ const PreferenceCard = ({ oneUser, color }) => {
   ];
 
   const [category, setCategory] = useState('');
+  const [features, setFeatures] = useState([
+    {
+      name: "Rating",
+      isDragging: false 
+    },
+    {
+      name: "Disatnce",
+      isDragging: false 
+    },
+    {
+      name: "Cost",
+      isDragging: false 
+    }
+  ]);
 
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -39,6 +53,54 @@ const PreferenceCard = ({ oneUser, color }) => {
       },
     },
   });
+
+  let featureItemDrag = useRef()
+  let featureItemDragOver = useRef()    
+
+  function D_Start(e,index){
+    featureItemDrag.current = index;
+  }
+
+  function D_Enter(e,index){
+    featureItemDragOver.current = index
+
+    const cpArr = [...features]
+
+    let finalArr = []
+
+    cpArr.forEach(item=>{
+      finalArr.push({
+        name: item.name,
+        isDragging: false
+      })
+    })
+
+    finalArr[index].isDragging = true;
+
+    setFeatures(finalArr);
+  }
+
+  function D_End(e,index){
+    const arr1 = [...features]
+
+    const feature_item_main = arr1[featureItemDrag.current]
+    arr1.splice(featureItemDrag.current, 1)
+    arr1.splice(featureItemDragOver.current, 0, feature_item_main)
+
+    featureItemDrag.current = null;
+    featureItemDragOver.current = null;
+
+    let f_arr = []
+
+    arr1.forEach(item=>{
+      f_arr.push({
+        name: item.name,
+        isDragging: false
+      })
+    })
+
+    setFeatures(f_arr);
+}
 
   return (
     <Box sx={{ width: '75vh' }}>
@@ -93,6 +155,15 @@ const PreferenceCard = ({ oneUser, color }) => {
                   </Box>
                 </Stack>
               </Stack>
+              {features.map((item, index)=>(
+                    <React.Fragment>
+
+                    <h3 draggable droppable onDragStart={e=> D_Start(e,index)} onDragEnter={e=> D_Enter(e,index)} onDragEnd={e=> D_End(e,index)} className="feature-text">{item.name}</h3>
+                    {item.isDragging ?  <div className="drag-indicator"></div> : null}
+                   
+                    </React.Fragment>
+                    
+                ))}
             </ThemeProvider>
           </CardContent>
         </Card>
