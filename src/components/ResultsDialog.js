@@ -5,7 +5,7 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import GradeIcon from '@mui/icons-material/Grade';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -49,10 +49,13 @@ const ResultsDialog = ({ handleClose, open, restaurantResults }) => {
                   alt="Paella dish"
                 />
                 <CardContent>
-                  <Stack>
+                  <Stack spacing={1}> 
                     <Typography>{restaurant?.location.display_address[0] + " | " + restaurant?.location.display_address[1]}</Typography>
-                    <Typography>Rating: {restaurant?.rating}</Typography>
-                    <Typography>Phone: {restaurant?.display_phone}</Typography>
+                    <Stack direction="row">
+                    <Typography><span style={{fontWeight: "bold"}}>Rating:</span> {restaurant?.rating}</Typography>
+                    <GradeIcon size='small' style={{color: "orange", marginLeft: "2px"}}/>
+                    </Stack>
+                    <Typography><span style={{fontWeight: "bold"}}>Phone:</span> {restaurant?.display_phone}</Typography>
                   </Stack>
                 </CardContent>
                 <CardActions disableSpacing>

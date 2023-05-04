@@ -114,7 +114,7 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
     <Box sx={{ width: '75vh' }}>
       <Stack sx={{ mx: 2 }}>
         <Stack direction='row' alignItems='center' justifyContent='center' gap={1}>
-          <Typography fontFamily="Poppins" fontWeight="bold">{oneUser}</Typography>
+          <Typography fontWeight="bold" variant="h6">{oneUser}</Typography>
           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke={mainColor} fill={secColor} stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <circle cx="12" cy="12" r="9" />
@@ -126,51 +126,6 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
           <CardContent>
             <ThemeProvider theme={theme}>
               <Stack spacing={2}>
-                {/* <Stack spacing={1}>
-                  <Typography>Max Distance Away (Miles)</Typography>
-                  <Box width='50vh'>
-                    <Slider
-                      defaultValue={15}
-                      valueLabelDisplay="auto"
-                      min={0}
-                      max={25}
-                      onChange={handleDistanceChange}
-                    />
-                  </Box>
-                </Stack> */}
-                {/* <Stack spacing={1} >
-                  <Typography>Cuisine Category</Typography>
-                  <Box sx={{ width: '50vh' }}>
-                    <FormControl fullWidth>
-                      <InputLabel>Category</InputLabel>
-                      <Select
-                        value={category}
-                        label="Category"
-                        onChange={handleCategoryChange}
-                        sx={{ color: orange[500] }}
-                      >
-                        <MenuItem value='sushi'>Sushi</MenuItem>
-                        <MenuItem value='mexican'>Mexican</MenuItem>
-                        <MenuItem value='mediterranean'>Mediterranean</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Box>
-                </Stack> */}
-                {/* <Stack spacing={1}>
-                  <Typography>Max Price Level</Typography>
-                  <Box width='50vh'>
-                    <Slider
-                      defaultValue={2}
-                      valueLabelDisplay="auto"
-                      step={1}
-                      marks={marks}
-                      min={1}
-                      max={4}
-                      sx={{ mx: 4 }}
-                      onChange={handlePriceLevelChange}
-                    />
-                  </Box>
-                </Stack> */}
               </Stack>
               {features.map((item, index) => (
                 <React.Fragment>
