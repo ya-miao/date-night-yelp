@@ -1,7 +1,7 @@
 import './App.css';
 import axios from 'axios'
 
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
 import CoupleYelp from './pages/CoupleYelp';
 
@@ -10,6 +10,7 @@ import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
 import awsExports from './aws-exports';
+import { useEffect } from 'react';
 Amplify.configure(awsExports);
 
 const App = () => {
@@ -28,16 +29,26 @@ const App = () => {
     },
   };
   //
-  axios
-    .get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, config)
-    .then((response) => {
-      console.log('response: ');
-      console.log(response);
-    });
+  const callYelpApi = async () => {
+    console.log('callYelpApi:');
+    try {
+      await axios
+        .get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, config)
+        .then((response) => {
+          console.log('response: ');
+          console.log(response);
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
   //
 
+  useEffect(() => {
+    // callYelpApi();
+  }, []);
+
   return (
-    // <Container sx={{ my: 4 }}>
     <Grid
       container
       spacing={0}
@@ -55,7 +66,6 @@ const App = () => {
         </Authenticator>
       </Grid>
     </Grid>
-    // </Container>
   );
 };
 
