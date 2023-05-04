@@ -174,7 +174,7 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
               </Stack>
               {features.map((item, index) => (
                 <React.Fragment>
-                  <div draggable droppable onDragStart={e => D_Start(e, index)} onDragEnter={e => D_Enter(e, index)} onDragEnd={e => D_End(e, index)} className="feature-text">
+                  <div draggable droppable onDragStart={e => D_Start(e, index)} onDragEnter={e => D_Enter(e, index)} onDragEnd={e => D_End(e, index)} className="feature-text" style={{backgroundColor: secColor, color: "black"}}>
                     <h3>{item.name}</h3>
                     {item.name == "Cost" ? (
                       <Stack spacing={1}>
