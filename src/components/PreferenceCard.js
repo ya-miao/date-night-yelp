@@ -1,9 +1,9 @@
+import React, { useEffect, useRef, useState } from "react";
 import { Box, Card, CardContent, InputLabel, MenuItem, FormControl, Select, Slider, Stack, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { orange, yellow } from '@mui/material/colors';
-import React, {useState, useRef} from "react"
+import { orange } from '@mui/material/colors';
 
-const PreferenceCard = ({ oneUser, mainColor, secColor }) => {
+const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCategory, setPriceLevel }) => {
   const marks = [
     {
       value: 1,
@@ -23,14 +23,14 @@ const PreferenceCard = ({ oneUser, mainColor, secColor }) => {
     },
   ];
 
-  const [category, setCategory] = useState('');
+  // const [category, setCategory] = useState('');
   const [features, setFeatures] = useState([
     {
       name: "Rating",
       isDragging: false 
     },
     {
-      name: "Disatnce",
+      name: "Distance",
       isDragging: false 
     },
     {
@@ -39,8 +39,16 @@ const PreferenceCard = ({ oneUser, mainColor, secColor }) => {
     }
   ]);
 
-  const handleChange = (event) => {
+  const handleDistanceChange = (event) => {
+    setMaxDistance(event.target.value);
+  };
+  
+  const handleCategoryChange = (event) => {
     setCategory(event.target.value);
+  };
+
+  const handlePriceLevelChange = (event) => {
+    setPriceLevel(event.target.value);
   };
 
   const theme = createTheme({
@@ -115,22 +123,22 @@ const PreferenceCard = ({ oneUser, mainColor, secColor }) => {
           </svg>
         </Stack>
         <Card style={{ backgroundColor: mainColor, color: "white" }}>
-          {/* <Card> */}
           <CardContent>
             <ThemeProvider theme={theme}>
               <Stack spacing={2}>
                 <Stack spacing={1}>
-                  <Typography>Max distance</Typography>
+                  <Typography>Max Distance Away (Miles)</Typography>
                   <Box width='50vh'>
                     <Slider
-                      defaultValue={10}
+                      defaultValue={15}
                       valueLabelDisplay="auto"
                       min={0}
                       max={25}
+                      onChange={handleDistanceChange}
                     />
                   </Box>
                 </Stack>
-                <Stack spacing={1} >
+                {/* <Stack spacing={1} >
                   <Typography>Cuisine Category</Typography>
                   <Box sx={{ width: '50vh' }}>
                     <FormControl fullWidth>
@@ -138,27 +146,28 @@ const PreferenceCard = ({ oneUser, mainColor, secColor }) => {
                       <Select
                         value={category}
                         label="Category"
-                        onChange={handleChange}
+                        onChange={handleCategoryChange}
                         sx={{ color: orange[500] }}
                       >
-                        <MenuItem value='Sushi'>Sushi</MenuItem>
-                        <MenuItem value='Mexican'>Mexican</MenuItem>
-                        <MenuItem value='Mediterranean'>Mediterranean</MenuItem>
+                        <MenuItem value='sushi'>Sushi</MenuItem>
+                        <MenuItem value='mexican'>Mexican</MenuItem>
+                        <MenuItem value='mediterranean'>Mediterranean</MenuItem>
                       </Select>
                     </FormControl>
                   </Box>
-                </Stack>
+                </Stack> */}
                 <Stack spacing={1}>
-                  <Typography>Price level</Typography>
+                  <Typography>Max Price Level</Typography>
                   <Box width='50vh'>
                     <Slider
-                      defaultValue={1}
+                      defaultValue={2}
                       valueLabelDisplay="auto"
                       step={1}
                       marks={marks}
                       min={1}
                       max={4}
                       sx={{ mx: 4 }}
+                      onChange={handlePriceLevelChange}
                     />
                   </Box>
                 </Stack>
@@ -179,5 +188,6 @@ const PreferenceCard = ({ oneUser, mainColor, secColor }) => {
     </Box>
   );
 }
+
 
 export default PreferenceCard;
