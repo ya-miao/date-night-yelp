@@ -40,7 +40,7 @@ const ResultsDialog = ({ handleClose, open, restaurantResults }) => {
               <Card sx={{ maxWidth: 345 }}>
                 <CardHeader
                   title={restaurant?.name}
-                  style={{backgroundColor: "#28282B", color: "orange"}}
+                  style={{backgroundColor: "#28282B", color: "orange", borderBottom: "2px solid orange"}}
                 />
                 <CardMedia
                   component="img"
