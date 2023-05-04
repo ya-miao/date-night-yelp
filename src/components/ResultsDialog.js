@@ -1,8 +1,28 @@
 import { Dialog, DialogTitle, IconButton, Stack, Typography } from "@mui/material";
-
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 import CloseIcon from '@mui/icons-material/Close';
 
-const ResultsDialog = ({handleClose, open, restaurantResults}) => {
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
+
+const ResultsDialog = ({ handleClose, open, restaurantResults }) => {
   return (
     <Dialog onClose={handleClose} open={open} fullScreen={true} sx={{ m: 10 }}>
       <DialogTitle>
@@ -13,12 +33,38 @@ const ResultsDialog = ({handleClose, open, restaurantResults}) => {
           </IconButton>
         </Stack>
       </DialogTitle>
-      <Stack sx={{ m: 4 }} spacing={2}>
-        <Typography>Here is a list of recommended restaurants</Typography>
-        {restaurantResults?.map((restaurant, index) => (
-          <Typography>{restaurant?.name}</Typography>
-        ))}
-      </Stack>
+      <Box sx={{ flexGrow: 1 }} padding={3}>
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          {restaurantResults?.map((restaurant, index) => (
+            <Grid item md={4} key={index} justifyContent="center" alignItems="center">
+              <Card sx={{ maxWidth: 345 }}>
+                <CardHeader
+                  title={restaurant?.name}
+                  style={{backgroundColor: "#28282B", color: "orange"}}
+                />
+                <CardMedia
+                  component="img"
+                  height="194"
+                  image={restaurant?.image_url}
+                  alt="Paella dish"
+                />
+                <CardContent>
+                  <Stack>
+                    <Typography>{restaurant?.location.display_address[0] + " | " + restaurant?.location.display_address[1]}</Typography>
+                    <Typography>Rating: {restaurant?.rating}</Typography>
+                    <Typography>Phone: {restaurant?.display_phone}</Typography>
+                  </Stack>
+                </CardContent>
+                <CardActions disableSpacing>
+                  <IconButton aria-label="add to favorites">
+                    <FavoriteBorderIcon style={{color: "orange"}} />
+                  </IconButton>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Dialog>
   );
 }
