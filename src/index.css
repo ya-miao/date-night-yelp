@@ -30,10 +30,23 @@ code {
   --testing-light-gray: #E9E6E6;
   --light-blue: #C8EFF9;
   --pastel-light-blue: #C1C8E4;
-  --off-black: #342C34
+  --off-black: #342C34;
 }
 
-.title-section img {
+.dining-image {
   width: 9rem;
   height: 9rem;
+}
+
+.find-resturants-button {
+  width: 15rem;
+  padding: 0.8rem;
+  margin: 2rem auto 0 auto;
+  font-size: large;
+  cursor: pointer;
+  /* background-color: rgba(0, 0, 0, 0.882); */
+  background-color: #28282B;
+  color: orange;
+  border-radius: 10px;
+  border: none;
 }
