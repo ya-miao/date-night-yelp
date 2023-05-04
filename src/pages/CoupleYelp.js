@@ -9,7 +9,8 @@ import { orange, yellow } from '@mui/material/colors';
 import ResultsDialog from '../components/ResultsDialog';
 
 // Let's add some way for users to input person 1 and person 2
-const CoupleYelp = ({ callYelpApi, setConfigParams, restaurantResults }) => {
+// We also need to take into account preferences from both person 1 and 2 separately
+const CoupleYelp = ({ callYelpApi, restaurantResults, setMaxDistance, setCategory, setPriceLevel }) => {
   const signOut = async () => {
     try {
       await Auth.signOut();
@@ -49,11 +50,17 @@ const CoupleYelp = ({ callYelpApi, setConfigParams, restaurantResults }) => {
           <Box direction="row" mt={3}>
             <Grid container spacing={3}>
               <Grid item xs={6}>
-                <PreferenceCard oneUser='Person One' mainColor="#A64AC9" secColor="#eecdfb" />
+                <PreferenceCard oneUser='Person One' mainColor="#A64AC9" secColor="#eecdfb"
+                  setMaxDistance={setMaxDistance}
+                  setCategory={setCategory}
+                  setPriceLevel={setPriceLevel} />
               </Grid>
               <Divider></Divider>
               <Grid item xs={6}>
-                <PreferenceCard oneUser='Person Two' mainColor="#473890" secColor="#d7cffc" />
+                <PreferenceCard oneUser='Person Two' mainColor="#473890" secColor="#d7cffc"
+                  setMaxDistance={setMaxDistance}
+                  setCategory={setCategory}
+                  setPriceLevel={setPriceLevel} />
               </Grid>
             </Grid>
           </Box>

@@ -15,12 +15,27 @@ Amplify.configure(awsExports);
 
 const App = () => {
 
-  const [configParams, setConfigParams] = useState({
+  const [maxDistance, setMaxDistance] = useState(15);
+  const [category, setCategory] = useState('');
+  const [priceLevel, setPriceLevel] = useState(2);
+
+  // const [configParams, setConfigParams] = useState({
+  //   term: "restaurants",
+  //   location: 'NYC',
+  //   sort_by: "best_match",
+  //   limit: 10,
+  //   radius: maxDistance * 1609,
+  //   price: priceLevel
+  // });
+
+  const configParams = {
     term: "restaurants",
     location: 'NYC',
     sort_by: "best_match",
     limit: 10,
-  });
+    radius: maxDistance * 1609,
+    price: priceLevel
+  };
 
   const [restaurantResults, setRestaurantResults] = useState([]);
 
@@ -54,6 +69,16 @@ const App = () => {
     console.log(restaurantResults);
   }, [restaurantResults])
 
+  useEffect(() => {
+    console.log('priceLevel: ');
+    console.log(priceLevel);
+  }, [priceLevel])
+
+  useEffect(() => {
+    console.log('maxDistance: ');
+    console.log(maxDistance);
+  }, [maxDistance])
+
   return (
     <Grid
       container
@@ -66,7 +91,7 @@ const App = () => {
         <Authenticator >
           {({ signOut, user }) => (
             <Box>
-              <CoupleYelp callYelpApi={callYelpApi} setConfigParams={setConfigParams} restaurantResults={restaurantResults} />
+              <CoupleYelp callYelpApi={callYelpApi} restaurantResults={restaurantResults} setMaxDistance={setMaxDistance} setCategory={setCategory} setPriceLevel={setPriceLevel} />
             </Box>
           )}
         </Authenticator>
