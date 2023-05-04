@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Auth } from 'aws-amplify';
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
 import DiningSvg from "../images/dining.svg";
 import PreferenceCard from "../components/PreferenceCard";
 import { orange, yellow } from '@mui/material/colors';
@@ -25,7 +25,7 @@ const CoupleYelp = ({ callYelpApi, setConfigParams, restaurantResults }) => {
   };
 
   return (
-    <Stack>
+    <Stack mb={4}>
       <Stack direction='row' justifyContent='space-between' sx={{ backgroundColor: "black", color: orange[500] }}>
         <Stack direction='row' alignItems='center' justifyContent='center' gap={1}>
           <Typography>Current Location: NYC</Typography>
@@ -42,25 +42,30 @@ const CoupleYelp = ({ callYelpApi, setConfigParams, restaurantResults }) => {
           }}
         >Sign Out</Button>
       </Stack>
-      <Stack alignItems='center' justifyContent='center' className='title-section'>
-        <img src={DiningSvg} alt="Your SVG" />
-        <Stack direction="column" sx={{ width: "fitContent", height: "95%", borderRadius: "5px" }} padding={4} bgcolor="white" alignItems="center" alignContent="center">
+      <Stack alignItems='center' justifyContent='center' mt={2}>
+        <img src={DiningSvg} alt="Your SVG" className='dining-image'/>
+        <Stack direction="column" mt={2} sx={{ width: "fitContent", height: "95%", borderRadius: "5px" }} padding={4} bgcolor="white" alignItems="center" alignContent="center">
           <Typography variant="h3" fontFamily="Pacifico">Not sure where to eat?</Typography>
-          <Button variant='contained' onClick={() => {
-            setOpenResults(true);
-            // API call runs here
-            callYelpApi();
-          }} sx={{ mb: 6 }}>Find restaurants</Button>
           <Box direction="row" mt={3}>
             <Grid container spacing={3}>
               <Grid item xs={6}>
                 <PreferenceCard oneUser='Person One' mainColor="#A64AC9" secColor="#eecdfb" />
               </Grid>
+              <Divider></Divider>
               <Grid item xs={6}>
                 <PreferenceCard oneUser='Person Two' mainColor="#473890" secColor="#d7cffc" />
               </Grid>
             </Grid>
           </Box>
+          <button
+            className='find-resturants-button'
+            onClick={() => {
+              setOpenResults(true);
+              // API call runs here
+              callYelpApi();
+            }}
+          >
+            Find restaurants</button>
         </Stack>
       </Stack>
       <ResultsDialog
