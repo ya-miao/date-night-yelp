@@ -10,10 +10,19 @@ import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
 import awsExports from './aws-exports';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 Amplify.configure(awsExports);
 
 const App = () => {
+
+  const [ configParams, setConfigParams ] = useState({
+    term: "restaurants",
+    location: 'NYC',
+    sort_by: "best_match",
+    limit: 10,
+  });
+
+  const [ restaurantResults, setRestaurantResults ] = useState([]);
 
   // Example working API call. We can work off of this base.
   const config = {
@@ -21,12 +30,7 @@ const App = () => {
       Authorization:
         "Bearer KNMAWkmyDKUpkTY7xuFS4bXpVgWS9uunqKuhBlfEw9mn4BOjrfNl1nDeSJphPP9LIsbGXMWCjjBX1S3EJtuhR4ackXwAB5Re_A2O0ZYP1lNFQ-SQJ5l2gjVCsTFQZHYx",
     },
-    params: {
-      term: "restaurants",
-      location: 'NYC',
-      sort_by: "best_match",
-      limit: 50,
-    },
+    params: configParams,
   };
   //
   const callYelpApi = async () => {
@@ -37,6 +41,7 @@ const App = () => {
         .then((response) => {
           console.log('response: ');
           console.log(response);
+          setRestaurantResults(response?.data?.businesses);
         });
     } catch (error) {
       console.error(error);
@@ -45,8 +50,9 @@ const App = () => {
   //
 
   useEffect(() => {
-    // callYelpApi();
-  }, []);
+    console.log('restaurantResults: ');
+    console.log(restaurantResults);
+  }, [restaurantResults])
 
   return (
     <Grid
@@ -60,7 +66,7 @@ const App = () => {
         <Authenticator >
           {({ signOut, user }) => (
             <Box sx={{ width: "100%" }}>
-              <CoupleYelp />
+              <CoupleYelp callYelpApi={callYelpApi} setConfigParams={setConfigParams} restaurantResults={restaurantResults}/>
             </Box>
           )}
         </Authenticator>
