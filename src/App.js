@@ -22,7 +22,8 @@ const App = () => {
 
   const configParams = {
     term: "restaurants",
-    location: 'NYC',
+    latitude: userLocation?.latitude,    
+    longitude: userLocation?.longitude,    
     sort_by: "best_match",
     limit: 10,
     radius: maxDistance * 1609,
@@ -92,7 +93,6 @@ const App = () => {
   useEffect(() => {
     getUserLocation();
   }, [])
-
 
   return (
     <Grid
