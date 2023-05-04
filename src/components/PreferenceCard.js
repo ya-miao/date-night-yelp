@@ -215,7 +215,6 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
                   </div>
                   {item.isDragging ? <div className="drag-indicator"></div> : null}
                 </React.Fragment>
-
               ))}
             </ThemeProvider>
           </CardContent>
