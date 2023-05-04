@@ -54,6 +54,7 @@ code {
 .find-resturants-button:hover {
   background-color: #28282bee;
   transform: translateY(-1px);
+  color: orange;
 }
 
 
@@ -88,4 +89,26 @@ div.drag-indicator {
   transition: 0.4s all;
   cursor: pointer;
   transform: scale(0.98);
+}
+
+.white-container {
+  width: fit-content; 
+  height: 95%;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.underlined {
+  position: relative;
+}
+.underlined:after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  height: 7px;
+  width: 100%;
+  border: solid 4px orange;
+  border-color: orange transparent transparent transparent;
+  border-radius: 50%;
 }
