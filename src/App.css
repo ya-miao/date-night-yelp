@@ -47,7 +47,7 @@ div.drag-indicator{
 
 .feature-text{
   padding: 20px;
-  background: linear-gradient(0deg, rgb(38, 193, 196) 0%, rgb(58, 149, 97) 80%);
+  background: rgb(74, 146, 105);
   border-radius: 15px;
   transition: 0.4s all;
   margin-top:20px;
