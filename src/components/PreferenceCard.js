@@ -27,22 +27,22 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
   const [features, setFeatures] = useState([
     {
       name: "Rating",
-      isDragging: false 
+      isDragging: false
     },
     {
       name: "Distance",
-      isDragging: false 
+      isDragging: false
     },
     {
       name: "Cost",
-      isDragging: false 
+      isDragging: false
     }
   ]);
 
   const handleDistanceChange = (event) => {
     setMaxDistance(event.target.value);
   };
-  
+
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
@@ -63,20 +63,20 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
   });
 
   let featureItemDrag = useRef()
-  let featureItemDragOver = useRef()    
+  let featureItemDragOver = useRef()
 
-  function D_Start(e,index){
+  function D_Start(e, index) {
     featureItemDrag.current = index;
   }
 
-  function D_Enter(e,index){
+  function D_Enter(e, index) {
     featureItemDragOver.current = index
 
     const cpArr = [...features]
 
     let finalArr = []
 
-    cpArr.forEach(item=>{
+    cpArr.forEach(item => {
       finalArr.push({
         name: item.name,
         isDragging: false
@@ -88,7 +88,7 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
     setFeatures(finalArr);
   }
 
-  function D_End(e,index){
+  function D_End(e, index) {
     const arr1 = [...features]
 
     const feature_item_main = arr1[featureItemDrag.current]
@@ -100,7 +100,7 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
 
     let f_arr = []
 
-    arr1.forEach(item=>{
+    arr1.forEach(item => {
       f_arr.push({
         name: item.name,
         isDragging: false
@@ -108,7 +108,7 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
     })
 
     setFeatures(f_arr);
-}
+  }
 
   return (
     <Box sx={{ width: '75vh' }}>
@@ -126,7 +126,7 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
           <CardContent>
             <ThemeProvider theme={theme}>
               <Stack spacing={2}>
-                <Stack spacing={1}>
+                {/* <Stack spacing={1}>
                   <Typography>Max Distance Away (Miles)</Typography>
                   <Box width='50vh'>
                     <Slider
@@ -137,7 +137,7 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
                       onChange={handleDistanceChange}
                     />
                   </Box>
-                </Stack>
+                </Stack> */}
                 {/* <Stack spacing={1} >
                   <Typography>Cuisine Category</Typography>
                   <Box sx={{ width: '50vh' }}>
@@ -156,7 +156,7 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
                     </FormControl>
                   </Box>
                 </Stack> */}
-                <Stack spacing={1}>
+                {/* <Stack spacing={1}>
                   <Typography>Max Price Level</Typography>
                   <Box width='50vh'>
                     <Slider
@@ -170,17 +170,53 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
                       onChange={handlePriceLevelChange}
                     />
                   </Box>
-                </Stack>
+                </Stack> */}
               </Stack>
-              {features.map((item, index)=>(
-                    <React.Fragment>
+              {features.map((item, index) => (
+                <React.Fragment>
+                  <div draggable droppable onDragStart={e => D_Start(e, index)} onDragEnter={e => D_Enter(e, index)} onDragEnd={e => D_End(e, index)} className="feature-text">
+                    <h3>{item.name}</h3>
+                    {item.name == "Cost" ? (
+                      <Stack spacing={1}>
+                        <Typography>Max Price Level</Typography>
+                        <Box width='50vh'>
+                          <Slider
+                            defaultValue={2}
+                            valueLabelDisplay="auto"
+                            step={1}
+                            marks={marks}
+                            min={1}
+                            max={4}
+                            sx={{ mx: 4 }}
+                            onChange={handlePriceLevelChange}
+                          />
+                        </Box>
+                      </Stack>
+                    ) :
+                      item.name == "Distance" ? (
+                        <Stack spacing={1}>
+                          <Typography>Max Distance Away (Miles)</Typography>
+                          <Box width='50vh'>
+                            <Slider
+                              defaultValue={15}
+                              valueLabelDisplay="auto"
+                              min={0}
+                              max={25}
+                              onChange={handleDistanceChange}
+                            />
+                          </Box>
+                        </Stack>
+                      ) :
+                        item.name == "Rating" ? (
+                          <></>
+                        )
+                          :
+                          <></>}
+                  </div>
+                  {item.isDragging ? <div className="drag-indicator"></div> : null}
+                </React.Fragment>
 
-                    <h3 draggable droppable onDragStart={e=> D_Start(e,index)} onDragEnter={e=> D_Enter(e,index)} onDragEnd={e=> D_End(e,index)} className="feature-text">{item.name}</h3>
-                    {item.isDragging ?  <div className="drag-indicator"></div> : null}
-                   
-                    </React.Fragment>
-                    
-                ))}
+              ))}
             </ThemeProvider>
           </CardContent>
         </Card>
