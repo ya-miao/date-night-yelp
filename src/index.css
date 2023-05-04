@@ -87,5 +87,5 @@ div.drag-indicator{
 .feature-text:hover{
   transition: 0.4s all;
   cursor: pointer;
-  transform: scale(0.9);
+  transform: scale(0.98);
 }
