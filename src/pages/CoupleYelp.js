@@ -12,9 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import ResultsDialog from '../components/ResultsDialog';
 
-// Let's add some way for users to input person 1 and person 2
-// We also need to take into account preferences from both person 1 and 2 separately
-const CoupleYelp = ({ callYelpApi, restaurantResults, setCategory, setMaxDistanceOne, setPriceLevelOne, setMaxDistanceTwo, setPriceLevelTwo, location }) => {
+const CoupleYelp = ({ callYelpApi, restaurantResults, setCategories, setMaxDistanceOne, setPriceLevelOne, setMaxDistanceTwo, setPriceLevelTwo, location }) => {
   const signOut = async () => {
     try {
       await Auth.signOut();
@@ -70,14 +68,14 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategory, setMaxDistanc
             <Grid container spacing={3}>
               <Grid item xs={6}>
                 <PreferenceCard oneUser={user1Name} mainColor="#A64AC9" secColor="#eecdfb"
-                  setCategory={setCategory}
+                  setCategories={setCategories}
                   setMaxDistance={setMaxDistanceOne}
                   setPriceLevel={setPriceLevelOne} />
               </Grid>
               <Divider></Divider>
               <Grid item xs={6}>
                 <PreferenceCard oneUser={user2Name} mainColor="#473890" secColor="#d7cffc"
-                  setCategory={setCategory}
+                  setCategories={setCategories}
                   setMaxDistance={setMaxDistanceTwo}
                   setPriceLevel={setPriceLevelTwo} />
               </Grid>

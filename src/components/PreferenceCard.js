@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Card, CardContent, InputLabel, MenuItem, FormControl, Select, Slider, Stack, Typography } from "@mui/material";
+import { Box, Card, CardContent, Checkbox, FormControlLabel, FormGroup, InputLabel, MenuItem, FormControl, Select, Slider, Stack, Typography } from "@mui/material";
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { orange } from '@mui/material/colors';
 
@@ -37,6 +38,51 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
       isDragging: false
     }
   ]);
+
+  const [checkCategories, setCheckCategories] = useState({
+    breakfast_brunch: false,
+    burgers: false,
+    chinese: false,
+    french: false,
+    greek: false,
+    hotpot: false,
+    italian: false,
+    japanese: false,
+    korean: false,
+    mediterranean: false,
+    mexican: false,
+    pizza: false,
+    thai: false,
+    vegan: false,
+    vegetarian: false,
+    vietnamese: false,
+  });
+
+  const {
+    breakfast_brunch,
+    burgers,
+    chinese,
+    french,
+    greek,
+    hotpot,
+    italian,
+    japanese,
+    korean,
+    mediterranean,
+    mexican,
+    pizza,
+    thai,
+    vegan,
+    vegetarian,
+    vietnamese
+  } = checkCategories;
+
+  const handleCheckChange = (event) => {
+    setCheckCategories({
+      ...checkCategories,
+      [event.target.name]: event.target.checked,
+    });
+  };
 
   const handleDistanceChange = (event) => {
     setMaxDistance(event.target.value);
@@ -150,6 +196,119 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
                       max={25}
                       onChange={handleDistanceChange}
                     />
+                  </Box>
+                </Stack>
+                <Stack spacing={1}>
+                  <Typography>Categories</Typography>
+                  <Box sx={{ display: 'flex' }}>
+                    <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={breakfast_brunch} onChange={handleCheckChange} name="breakfast_brunch" />
+                          }
+                          label="Breakfast, Brunch"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={burgers} onChange={handleCheckChange} name="burgers" />
+                          }
+                          label="Burgers"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={chinese} onChange={handleCheckChange} name="chinese" />
+                          }
+                          label="Chinese"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={french} onChange={handleCheckChange} name="french" />
+                          }
+                          label="French"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={greek} onChange={handleCheckChange} name="greek" />
+                          }
+                          label="Greek"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={hotpot} onChange={handleCheckChange} name="hotpot" />
+                          }
+                          label="Hotpot"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={italian} onChange={handleCheckChange} name="italian" />
+                          }
+                          label="Italian"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={japanese} onChange={handleCheckChange} name="japanese" />
+                          }
+                          label="Japanese"
+                        />
+                      </FormGroup>
+                    </FormControl>
+                    <FormControl
+                      component="fieldset"
+                      sx={{ m: 3 }}
+                      variant="standard"
+                    >
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={korean} onChange={handleCheckChange} name="korean" />
+                          }
+                          label="Korean"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={mediterranean} onChange={handleCheckChange} name="mediterranean" />
+                          }
+                          label="Mediterranean"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={mexican} onChange={handleCheckChange} name="mexican" />
+                          }
+                          label="Mexican"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={pizza} onChange={handleCheckChange} name="pizza" />
+                          }
+                          label="Pizza"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={thai} onChange={handleCheckChange} name="thai" />
+                          }
+                          label="Thai"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={vegan} onChange={handleCheckChange} name="vegan" />
+                          }
+                          label="Vegan"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={vegetarian} onChange={handleCheckChange} name="vegetarian" />
+                          }
+                          label="Vegetarian"
+                        />
+                        <FormControlLabel
+                          control={
+                            <Checkbox checked={vietnamese} onChange={handleCheckChange} name="vietnamese" />
+                          }
+                          label="Vietnamese"
+                        />
+                      </FormGroup>
+                    </FormControl>
                   </Box>
                 </Stack>
               </Stack>

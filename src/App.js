@@ -20,10 +20,10 @@ const App = () => {
   const [maxDistanceOne, setMaxDistanceOne] = useState(15);
   const [priceLevelOne, setPriceLevelOne] = useState(2);
 
-  const [maxDistanceTwo, setMaxDistanceTwo] = useState(10);
-  const [priceLevelTwo, setPriceLevelTwo] = useState(3);
+  const [maxDistanceTwo, setMaxDistanceTwo] = useState(15);
+  const [priceLevelTwo, setPriceLevelTwo] = useState(2);
 
-  const [category, setCategory] = useState('');
+  const [categories, setCategories] = useState('');
 
   const configParams = {
     term: "restaurants",
@@ -90,6 +90,26 @@ const App = () => {
     getUserLocation();
   }, [])
 
+  useEffect(() => {
+    console.log('maxDistanceOne: ');
+    console.log(maxDistanceOne);
+  }, [maxDistanceOne]);
+
+  useEffect(() => {
+    console.log('maxDistanceTwo: ');
+    console.log(maxDistanceTwo);
+  }, [maxDistanceTwo]);
+
+  useEffect(() => {
+    console.log('priceLevelOne: ');
+    console.log(priceLevelOne);
+  }, [priceLevelOne]);
+
+  useEffect(() => {
+    console.log('priceLevelTwo: ');
+    console.log(priceLevelTwo);
+  }, [priceLevelTwo]);
+
   return (
     <Grid
       container
@@ -102,7 +122,16 @@ const App = () => {
         <Authenticator >
           {({ signOut, user }) => (
             <Box>
-              <CoupleYelp callYelpApi={callYelpApi} restaurantResults={restaurantResults} setCategory={setCategory} setMaxDistanceOne={setMaxDistanceOne} setPriceLevelOne={setPriceLevelOne} setMaxDistanceTwo={setMaxDistanceTwo} setPriceLevelTwo={setPriceLevelTwo} location={userLocation}/>
+              <CoupleYelp
+                callYelpApi={callYelpApi}
+                restaurantResults={restaurantResults}
+                setCategories={setCategories}
+                setMaxDistanceOne={setMaxDistanceOne}
+                setPriceLevelOne={setPriceLevelOne}
+                setMaxDistanceTwo={setMaxDistanceTwo}
+                setPriceLevelTwo={setPriceLevelTwo}
+                location={userLocation}
+              />
             </Box>
           )}
         </Authenticator>
