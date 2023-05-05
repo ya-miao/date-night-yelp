@@ -46,20 +46,19 @@ function func1(restaurant) {
   console.log("restaurant: " + JSON.stringify(restaurant));
 }
 
-
 const ResultsDialog = ({ handleClose, open, restaurantResults, location }) => {
   return (
     <Dialog onClose={handleClose} open={open} fullScreen={true} sx={{ m: 5 }}>
-      <DialogTitle style={{backgroundColor: "#C1C8E4", padding: "0"}}>
+      <DialogTitle style={{ backgroundColor: "#C1C8E4", padding: "0" }}>
         <Stack alignItems='center' direction='row' justifyContent='space-between'>
           <Typography variant='overline'></Typography>
           <IconButton onClick={handleClose}>
-            <CloseIcon size='small' color="black"/>
+            <CloseIcon size='small' color="black" />
           </IconButton>
         </Stack>
       </DialogTitle>
       <Box>
-        <Stack justifyContent="center" alignItems="center" style={{backgroundColor: "#C1C8E4"}}>
+        <Stack justifyContent="center" alignItems="center" style={{ backgroundColor: "#C1C8E4" }}>
           <Stack>
             <Typography variant="h3" fontFamily="Pacifico" className="underlined">Winner!</Typography>
           </Stack>
@@ -71,18 +70,19 @@ const ResultsDialog = ({ handleClose, open, restaurantResults, location }) => {
             <CardMedia
               component="img"
               height="194"
+              image={restaurantResults[0]?.image_url}
               alt="Paella dish"
             />
             <CardContent>
               <Stack spacing={1}>
-                {/* <Typography>{restaurant?.location.display_address[0] + " | " + restaurant?.location.display_address[1]}</Typography>
-              <Stack direction="row">
-                <Typography><span style={{ fontWeight: "bold" }}>Rating:</span> {restaurant?.rating}</Typography>
-                <GradeIcon size='small' style={{ color: "orange", marginLeft: "2px" }} />
-              </Stack>
-              <Typography><span style={{ fontWeight: "bold" }}>Phone:</span> {restaurant?.display_phone}</Typography>
-              <Typography><span style={{ fontWeight: "bold" }}>Price:</span> {restaurant?.price}</Typography>
-              <Typography><span style={{ fontWeight: "bold" }}>Diatance:</span> {getDistance(location, restaurant.coordinates)} <span> miles</span></Typography> */}
+                <Typography>{restaurantResults[0]?.location.display_address[0] + " | " + restaurantResults[0]?.location.display_address[1]}</Typography>
+                <Stack direction="row">
+                  <Typography><span style={{ fontWeight: "bold" }}>Rating:</span> {restaurantResults[0]?.rating}</Typography>
+                  <GradeIcon size='small' style={{ color: "orange", marginLeft: "2px" }} />
+                </Stack>
+                <Typography><span style={{ fontWeight: "bold" }}>Phone:</span> {restaurantResults[0]?.display_phone}</Typography>
+                <Typography><span style={{ fontWeight: "bold" }}>Price:</span> {restaurantResults[0]?.price}</Typography>
+                <Typography><span style={{ fontWeight: "bold" }}>Distance:</span> {restaurantResults[0] && getDistance(location, restaurantResults[0]?.coordinates)} <span> miles</span></Typography>
               </Stack>
             </CardContent>
             <CardActions disableSpacing>
@@ -97,10 +97,10 @@ const ResultsDialog = ({ handleClose, open, restaurantResults, location }) => {
         </Stack>
         <Box sx={{ flexGrow: 1 }} ml={5} mt={5}>
           <Stack justifyContent="center" alignItems="center" mb={5}>
-          <Typography variant="h4" fontFamily="Poppins" letterSpacing={0}>You may also like</Typography>
+            <Typography variant="h4" fontFamily="Poppins" letterSpacing={0}>You may also like</Typography>
           </Stack>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            {restaurantResults?.map((restaurant, index) => (
+            {restaurantResults?.slice(1).map((restaurant, index) => (
               <Grid item md={4} key={index} justifyContent="center" alignItems="center">
                 <Card sx={{ maxWidth: 345 }}>
                   <CardHeader
