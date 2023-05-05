@@ -24,7 +24,8 @@ const App = () => {
   const [maxDistanceTwo, setMaxDistanceTwo] = useState(15);
   const [priceLevelTwo, setPriceLevelTwo] = useState(2);
 
-  const [categories, setCategories] = useState('');
+  const [categoriesOne, setCategoriesOne] = useState([]);
+  const [categoriesTwo, setCategoriesTwo] = useState([]);
 
   const configParams = {
     term: "restaurants",
@@ -32,15 +33,14 @@ const App = () => {
     longitude: userLocation?.longitude,    
     sort_by: "best_match",
     limit: 20,
+    categories: categoriesOne.concat(categoriesTwo).filter((element, index, array) => array.indexOf(element) === index).toString(),
     radius: (maxDistanceOne > maxDistanceTwo ? maxDistanceOne : maxDistanceTwo) * 1609,
     price: priceLevelOne !== priceLevelTwo ? `${priceLevelOne}, ${priceLevelTwo}` : priceLevelOne
   };
 
-  const [restaurantResults, setRestaurantResults] = useState([]);
-  const [winerResuaurant, setWinnerRestaurants] = useState({});
+  const [winnerRestaurant, setWinnerRestaurant] = useState({});
   const [suggestionRestaurants, setSuggetstionRestaurants] = useState([]);
 
-  // Example working API call. We can work off of this base.
   const config = {
     headers: {
       Authorization:
@@ -48,22 +48,22 @@ const App = () => {
     },
     params: configParams,
   };
-  //
+
   const callYelpApi = async () => {
     console.log('callYelpApi:');
     try {
       await axios
-        .get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, config)
-        .then((response) => {
+      .get(`${'https://lighthall-dateyelp-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, config)
+      .then((response) => {
           const restaurants = response?.data?.businesses;
-          setWinnerRestaurants(restaurants.shift());
-          setSuggetstionRestaurants(restaurants);
+          const [firstRestaurant, ...restOfRestaurants] = restaurants;
+          setWinnerRestaurant(firstRestaurant);
+          setSuggetstionRestaurants(restOfRestaurants);
         });
     } catch (error) {
       console.error(error);
     }
   };
-  //
 
   const getUserLocation = async () => {
     const success = async (position) => {
@@ -83,34 +83,13 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log('restaurantResults: ');
-    console.log(restaurantResults);
+    
     console.log(userLocation, "userLocation");
-  }, [restaurantResults, userLocation])
+  }, [winnerRestaurant, suggestionRestaurants, userLocation])
 
   useEffect(() => {
     getUserLocation();
   }, [])
-
-  useEffect(() => {
-    console.log('maxDistanceOne: ');
-    console.log(maxDistanceOne);
-  }, [maxDistanceOne]);
-
-  useEffect(() => {
-    console.log('maxDistanceTwo: ');
-    console.log(maxDistanceTwo);
-  }, [maxDistanceTwo]);
-
-  useEffect(() => {
-    console.log('priceLevelOne: ');
-    console.log(priceLevelOne);
-  }, [priceLevelOne]);
-
-  useEffect(() => {
-    console.log('priceLevelTwo: ');
-    console.log(priceLevelTwo);
-  }, [priceLevelTwo]);
 
   return (
     <Grid
@@ -126,14 +105,16 @@ const App = () => {
             <Box>
               <CoupleYelp
                 callYelpApi={callYelpApi}
-                winerResuaurant={winerResuaurant}
+                winnerRestaurant={winnerRestaurant}
                 suggestionRestaurants={suggestionRestaurants}
-                setCategories={setCategories}
+                setCategoriesOne={setCategoriesOne}
+                setCategoriesTwo={setCategoriesTwo}
                 setMaxDistanceOne={setMaxDistanceOne}
                 setPriceLevelOne={setPriceLevelOne}
                 setMaxDistanceTwo={setMaxDistanceTwo}
                 setPriceLevelTwo={setPriceLevelTwo}
                 location={userLocation}
+                getUserLocation={getUserLocation}
               />
             </Box>
           )}
