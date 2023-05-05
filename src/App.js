@@ -50,6 +50,7 @@ const App = () => {
           console.log('response: ');
           console.log(response);
           setRestaurantResults(response?.data?.businesses);
+          console.log(response?.data?.businesses[0])
         });
     } catch (error) {
       console.error(error);

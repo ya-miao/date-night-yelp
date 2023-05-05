@@ -77,6 +77,7 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setMaxDistance, setCategor
         open={openResults}
         handleClose={handleCloseResults}
         restaurantResults={restaurantResults}
+        location={location}
       />
     </Stack>
   )

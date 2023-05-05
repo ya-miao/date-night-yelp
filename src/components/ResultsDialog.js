@@ -21,8 +21,33 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+function getDistance(user_loc, restaurant_loc) {
+  const R = 6373;
+  const lat1 = user_loc.latitude;
+  const lon1 = user_loc.longitude;
+  const lat2 = restaurant_loc.latitude;
+  const lon2 = restaurant_loc.longitude;
+  const dLat = deg2rad(lat1 - lat2);
+  const dLon = deg2rad(lon1 - lon2);
+  const a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2); 
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  const d = R * c;
+  return d.toFixed(2); 
+}
 
-const ResultsDialog = ({ handleClose, open, restaurantResults }) => {
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
+}
+
+function func1(restaurant) {
+  console.log("restaurant: " + JSON.stringify(restaurant));
+}
+
+
+const ResultsDialog = ({ handleClose, open, restaurantResults, location }) => {
   return (
     <Dialog onClose={handleClose} open={open} fullScreen={true} sx={{ m: 10 }}>
       <DialogTitle>
@@ -56,6 +81,7 @@ const ResultsDialog = ({ handleClose, open, restaurantResults }) => {
                     <GradeIcon size='small' style={{color: "orange", marginLeft: "2px"}}/>
                     </Stack>
                     <Typography><span style={{fontWeight: "bold"}}>Phone:</span> {restaurant?.display_phone}</Typography>
+                    <Typography><span style={{fontWeight: "bold"}}>Diatance:</span> {getDistance(location, restaurant.coordinates)} <span> miles</span></Typography>
                   </Stack>
                 </CardContent>
                 <CardActions disableSpacing>
