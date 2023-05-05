@@ -97,7 +97,7 @@ const ResultsDialog = ({ handleClose, open, restaurantResults, location }) => {
         </Stack>
         <Box sx={{ flexGrow: 1 }} ml={5} mt={5}>
           <Stack justifyContent="center" alignItems="center" mb={5}>
-          <Typography variant="h3" fontFamily="Poppins">Other Suggestions</Typography>
+          <Typography variant="h4" fontFamily="Poppins" letterSpacing={0}>You may also like</Typography>
           </Stack>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             {restaurantResults?.map((restaurant, index) => (
