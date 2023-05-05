@@ -51,8 +51,8 @@ const App = () => {
     console.log('callYelpApi:');
     try {
       await axios
-        .get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, config)
-        .then((response) => {
+      .get(`${'https://lighthall-dateyelp-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, config)
+      .then((response) => {
           console.log('response: ');
           console.log(response);
           setRestaurantResults(response?.data?.businesses);
