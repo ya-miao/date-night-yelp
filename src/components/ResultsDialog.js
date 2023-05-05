@@ -42,12 +42,8 @@ function deg2rad(deg) {
   return deg * (Math.PI / 180);
 }
 
-function func1(restaurant) {
-  console.log("restaurant: " + JSON.stringify(restaurant));
-}
 
-
-const ResultsDialog = ({ handleClose, open, restaurantResults, location }) => {
+const ResultsDialog = ({ handleClose, open, winnerRestaurant, suggestionRestaurants, location }) => {
   return (
     <Dialog onClose={handleClose} open={open} fullScreen={true} sx={{ m: 5 }}>
       <DialogTitle style={{backgroundColor: "#C1C8E4", padding: "0"}}>
@@ -65,33 +61,34 @@ const ResultsDialog = ({ handleClose, open, restaurantResults, location }) => {
           </Stack>
           <Card sx={{ width: 345, margin: "30px 0" }}>
             <CardHeader
-              title="Winner Name"
+              title={winnerRestaurant?.name}
               style={{ backgroundColor: "#28282B", color: "orange", borderBottom: "2px solid orange" }}
             />
             <CardMedia
               component="img"
               height="194"
+              image={winnerRestaurant?.image_url}
               alt="Paella dish"
             />
             <CardContent>
               <Stack spacing={1}>
-                {/* <Typography>{restaurant?.location.display_address[0] + " | " + restaurant?.location.display_address[1]}</Typography>
+                <Typography>{winnerRestaurant?.location.display_address[0] + " | " + winnerRestaurant?.location.display_address[1]}</Typography>
               <Stack direction="row">
-                <Typography><span style={{ fontWeight: "bold" }}>Rating:</span> {restaurant?.rating}</Typography>
+                <Typography><span style={{ fontWeight: "bold" }}>Rating:</span> {winnerRestaurant?.rating}</Typography>
                 <GradeIcon size='small' style={{ color: "orange", marginLeft: "2px" }} />
               </Stack>
-              <Typography><span style={{ fontWeight: "bold" }}>Phone:</span> {restaurant?.display_phone}</Typography>
-              <Typography><span style={{ fontWeight: "bold" }}>Price:</span> {restaurant?.price}</Typography>
-              <Typography><span style={{ fontWeight: "bold" }}>Diatance:</span> {getDistance(location, restaurant.coordinates)} <span> miles</span></Typography> */}
+              <Typography><span style={{ fontWeight: "bold" }}>Phone:</span> {winnerRestaurant?.display_phone}</Typography>
+              <Typography><span style={{ fontWeight: "bold" }}>Price:</span> {winnerRestaurant?.price}</Typography>
+              <Typography><span style={{ fontWeight: "bold" }}>Diatance:</span> {getDistance(location, winnerRestaurant.coordinates)} <span> miles</span></Typography>
               </Stack>
             </CardContent>
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
                 <FavoriteBorderIcon style={{ color: "orange" }} />
               </IconButton>
-              {/* <a href={restaurant?.url} title={restaurant?.name + ` Yelp Page`} target="_blank"> */}
+              <a href={winnerRestaurant?.url} title={winnerRestaurant?.name + ` Yelp Page`} target="_blank">
               <Button style={{ color: "orange", fontWeight: "bold", marginLeft: "2px" }}>Visit Site</Button>
-              {/* </a> */}
+              </a>
             </CardActions>
           </Card>
         </Stack>
@@ -100,7 +97,7 @@ const ResultsDialog = ({ handleClose, open, restaurantResults, location }) => {
           <Typography variant="h4" fontFamily="Poppins" letterSpacing={0}>You may also like</Typography>
           </Stack>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            {restaurantResults?.map((restaurant, index) => (
+            {suggestionRestaurants?.map((restaurant, index) => (
               <Grid item md={4} key={index} justifyContent="center" alignItems="center">
                 <Card sx={{ maxWidth: 345 }}>
                   <CardHeader
