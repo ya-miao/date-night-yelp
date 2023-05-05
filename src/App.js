@@ -117,6 +117,7 @@ const App = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
+      style={{ minHeight: '100vh' }}
     >
       <Grid item sx={{ width: "100%" }}>
         <Authenticator >
