@@ -1,7 +1,7 @@
 import './App.css';
 import axios from 'axios'
 
-import { Box, Grid } from '@mui/material';
+import { Alert, Box, Grid, MuiAlert, Snackbar } from '@mui/material';
 
 import CoupleYelp from './pages/CoupleYelp';
 
@@ -16,6 +16,7 @@ Amplify.configure(awsExports);
 const App = () => {
 
   const [userLocation, setUserLocation] = useState([]);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const [maxDistanceOne, setMaxDistanceOne] = useState(15);
   const [priceLevelOne, setPriceLevelOne] = useState(2);
@@ -28,8 +29,8 @@ const App = () => {
 
   const configParams = {
     term: "restaurants",
-    latitude: userLocation?.latitude,    
-    longitude: userLocation?.longitude,    
+    latitude: userLocation?.latitude,
+    longitude: userLocation?.longitude,
     sort_by: "best_match",
     limit: 20,
     categories: categoriesOne.concat(categoriesTwo).filter((element, index, array) => array.indexOf(element) === index).toString(),
@@ -49,17 +50,21 @@ const App = () => {
 
   const callYelpApi = async () => {
     console.log('callYelpApi:');
-    try {
-      await axios
-      .get(`${'https://lighthall-dateyelp-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, config)
-      .then((response) => {
-          console.log('response: ');
-          console.log(response);
-          setRestaurantResults(response?.data?.businesses);
-          console.log(response?.data?.businesses[0])
-        });
-    } catch (error) {
-      console.error(error);
+    if (userLocation.length === 0) {
+      setOpenSnackbar(true);
+    } else {
+      try {
+        await axios
+          .get(`${'https://lighthall-dateyelp-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, config)
+          .then((response) => {
+            console.log('response: ');
+            console.log(response);
+            setRestaurantResults(response?.data?.businesses);
+            console.log(response?.data?.businesses[0])
+          });
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -80,6 +85,13 @@ const App = () => {
     navigator.geolocation.getCurrentPosition(success, error);
   }
 
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+
   useEffect(() => {
     console.log('restaurantResults: ');
     console.log(restaurantResults);
@@ -87,6 +99,8 @@ const App = () => {
   }, [restaurantResults, userLocation])
 
   useEffect(() => {
+    console.log('userLocation');
+    console.log(userLocation);
     getUserLocation();
   }, [])
 
@@ -114,6 +128,14 @@ const App = () => {
                 location={userLocation}
                 getUserLocation={getUserLocation}
               />
+              <Snackbar anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'center'
+              }} open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+                <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
+                  Allow access to your location to get recommendations.
+                </Alert>
+              </Snackbar>
             </Box>
           )}
         </Authenticator>
