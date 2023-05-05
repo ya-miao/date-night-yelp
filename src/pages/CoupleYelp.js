@@ -65,7 +65,7 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
         <Stack direction="column" mt={2} className='white-container' padding={4} bgcolor="white" alignItems="center" alignContent="center">
           <Stack spacing={3} alignItems="center" alignContent="center">
             <Typography variant="h3" fontFamily="Pacifico" className="underlined">Not sure where to eat?</Typography>
-            <Button onClick={() => setOpen(true)}>
+            <Button onClick={() => setOpen(true)} variant='outlined'>
               <Typography variant="Poppins">Who can't decide?</Typography>
             </Button>
           </Stack>

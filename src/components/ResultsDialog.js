@@ -48,7 +48,7 @@ function func1(restaurant) {
 
 const ResultsDialog = ({ handleClose, open, restaurantResults, location }) => {
   return (
-    <Dialog onClose={handleClose} open={open} fullScreen={true} sx={{ m: 5 }}>
+    <Dialog onClose={handleClose} open={open} fullScreen={true} sx={{ m: 4 }}>
       <DialogTitle style={{ backgroundColor: "#C1C8E4", padding: "0" }}>
         <Stack alignItems='center' direction='row' justifyContent='space-between'>
           <Typography variant='overline'></Typography>

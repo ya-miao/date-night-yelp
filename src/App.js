@@ -1,7 +1,9 @@
 import './App.css';
 import axios from 'axios'
 
-import { Alert, Box, Grid, MuiAlert, Snackbar } from '@mui/material';
+import { Alert, Box, Grid, Snackbar } from '@mui/material';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import CoupleYelp from './pages/CoupleYelp';
 
@@ -27,12 +29,14 @@ const App = () => {
   const [categoriesOne, setCategoriesOne] = useState([]);
   const [categoriesTwo, setCategoriesTwo] = useState([]);
 
+  const [openBackdrop, setOpenBackdrop] = useState(false);
+
   const configParams = {
     term: "restaurants",
     latitude: userLocation?.latitude,
     longitude: userLocation?.longitude,
     sort_by: "best_match",
-    limit: 20,
+    limit: 25,
     categories: categoriesOne.concat(categoriesTwo).filter((element, index, array) => array.indexOf(element) === index).toString(),
     radius: (maxDistanceOne > maxDistanceTwo ? maxDistanceOne : maxDistanceTwo) * 1609,
     price: priceLevelOne !== priceLevelTwo ? `${priceLevelOne}, ${priceLevelTwo}` : priceLevelOne
@@ -53,6 +57,7 @@ const App = () => {
     if (userLocation.length === 0) {
       setOpenSnackbar(true);
     } else {
+      setOpenBackdrop(true);
       try {
         await axios
           .get(`${'https://lighthall-dateyelp-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, config)
@@ -65,6 +70,7 @@ const App = () => {
       } catch (error) {
         console.error(error);
       }
+      setOpenBackdrop(false);
     }
   };
 
@@ -136,6 +142,12 @@ const App = () => {
                   Allow access to your location to get recommendations.
                 </Alert>
               </Snackbar>
+              <Backdrop
+                sx={{ color: '#fff', zIndex: 2000 }}
+                open={openBackdrop}
+              >
+                <CircularProgress color="inherit" sx={{ zIndex: 2001 }} />
+              </Backdrop>
             </Box>
           )}
         </Authenticator>
