@@ -7,12 +7,11 @@ import PreferenceCard from "../components/PreferenceCard";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import ResultsDialog from '../components/ResultsDialog';
 
-const CoupleYelp = ({ callYelpApi, restaurantResults, setCategories, setMaxDistanceOne, setPriceLevelOne, setMaxDistanceTwo, setPriceLevelTwo, location }) => {
+const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCategoriesTwo, setMaxDistanceOne, setPriceLevelOne, setMaxDistanceTwo, setPriceLevelTwo, location }) => {
   const signOut = async () => {
     try {
       await Auth.signOut();
@@ -68,14 +67,14 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategories, setMaxDista
             <Grid container spacing={3}>
               <Grid item xs={6}>
                 <PreferenceCard oneUser={user1Name} mainColor="#A64AC9" secColor="#eecdfb"
-                  setCategories={setCategories}
+                  setCategories={setCategoriesOne}
                   setMaxDistance={setMaxDistanceOne}
                   setPriceLevel={setPriceLevelOne} />
               </Grid>
               <Divider></Divider>
               <Grid item xs={6}>
                 <PreferenceCard oneUser={user2Name} mainColor="#473890" secColor="#d7cffc"
-                  setCategories={setCategories}
+                  setCategories={setCategoriesTwo}
                   setMaxDistance={setMaxDistanceTwo}
                   setPriceLevel={setPriceLevelTwo} />
               </Grid>

@@ -4,7 +4,7 @@ import { Box, Card, CardContent, Checkbox, FormControlLabel, FormGroup, InputLab
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { orange } from '@mui/material/colors';
 
-const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCategory, setPriceLevel }) => {
+const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCategories, setPriceLevel }) => {
   const marks = [
     {
       value: 1,
@@ -88,13 +88,18 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
     setMaxDistance(event.target.value);
   };
 
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-  };
-
   const handlePriceLevelChange = (event) => {
     setPriceLevel(event.target.value);
   };
+
+  const handleCategoryChange = (event) => {
+    const getCheckedCategories = Object.keys(checkCategories).filter(key => checkCategories[key] === true);
+    setCategories(getCheckedCategories);
+  };
+
+  useEffect(() => {
+    handleCategoryChange();
+  }, [checkCategories])
 
   const theme = createTheme({
     palette: {
