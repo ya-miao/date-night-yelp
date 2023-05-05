@@ -36,19 +36,20 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
   return (
     <Stack mb={4}>
       <Dialog
-        fullWidth="sm"
         open={open}
         onClose={handleClose}
       >
-        <DialogTitle>Who can't decide what to eat?</DialogTitle>
+        <DialogTitle>
+          <Typography fontFamily="Poppins" sx={{ mt: 1 }}>Who can't decide what to eat?</Typography>
+        </DialogTitle>
         <DialogContent>
-          <Stack spacing={10} direction="row">
-            <TextField id="standard-basic" label="Person 1" variant="standard" onChange={e => setUser1Name(e.target.value)}/>
-            <TextField id="standard-basic" label="Person 2" variant="standard" onChange={e => setUser2Name(e.target.value)}/>
+          <Stack spacing={6} direction="row">
+            <TextField size='small' fontFamily='Poppins' label="Person 1" variant="standard" onChange={e => setUser1Name(e.target.value)} />
+            <TextField size='small' fontFamily='Poppins' label="Person 2" variant="standard" onChange={e => setUser2Name(e.target.value)} />
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Submit</Button>
+          <Button variant='outlined' onClick={handleClose}>Set</Button>
         </DialogActions>
       </Dialog>
       <Stack direction='row' justifyContent='space-between' sx={{ backgroundColor: "#28282B", padding: "0.5rem 2rem" }}>
@@ -64,8 +65,8 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
         <Stack direction="column" mt={2} className='white-container' padding={4} bgcolor="white" alignItems="center" alignContent="center">
           <Stack spacing={3} alignItems="center" alignContent="center">
             <Typography variant="h3" fontFamily="Pacifico" className="underlined">Not sure where to eat?</Typography>
-            <Button onClick={() => setOpen(true)} variant='outlined' size='small'>
-              <Typography variant="overline">Who can't decide?</Typography>
+            <Button onClick={() => setOpen(true)}>
+              <Typography variant="Poppins">Who can't decide?</Typography>
             </Button>
           </Stack>
           <Box direction="row" mt={1}>

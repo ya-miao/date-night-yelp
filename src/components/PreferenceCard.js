@@ -324,50 +324,6 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
                   </Stack>
                 </div>
               </Stack>
-              {/* {features.map((item, index) => (
-                <React.Fragment>
-                  <div draggable droppable onDragStart={e => D_Start(e, index)} onDragEnter={e => D_Enter(e, index)} onDragEnd={e => D_End(e, index)} className="feature-text" style={{ backgroundColor: secColor, color: "black" }}>
-                    <h3>{item.name}</h3>
-                    {item.name === "Cost" ? (
-                      <Stack spacing={1}>
-                        <Typography>Max Price Level</Typography>
-                        <Box width='50vh'>
-                          <Slider
-                            defaultValue={2}
-                            valueLabelDisplay="auto"
-                            step={1}
-                            marks={marks}
-                            min={1}
-                            max={4}
-                            sx={{ mx: 4 }}
-                            onChange={handlePriceLevelChange}
-                          />
-                        </Box>
-                      </Stack>
-                    ) :
-                      item.name === "Distance" ? (
-                        <Stack spacing={1}>
-                          <Typography>Max Distance Away (Miles)</Typography>
-                          <Box width='50vh'>
-                            <Slider
-                              defaultValue={15}
-                              valueLabelDisplay="auto"
-                              min={0}
-                              max={25}
-                              onChange={handleDistanceChange}
-                            />
-                          </Box>
-                        </Stack>
-                      ) :
-                        item.name === "Rating" ? (
-                          <></>
-                        )
-                          :
-                          <></>}
-                  </div>
-                  {item.isDragging ? <div className="drag-indicator"></div> : null}
-                </React.Fragment>
-              ))} */}
             </ThemeProvider>
           </CardContent>
         </Card>
