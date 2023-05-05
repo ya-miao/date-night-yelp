@@ -23,7 +23,8 @@ const App = () => {
   const [maxDistanceTwo, setMaxDistanceTwo] = useState(15);
   const [priceLevelTwo, setPriceLevelTwo] = useState(2);
 
-  const [categories, setCategories] = useState('');
+  const [categoriesOne, setCategoriesOne] = useState([]);
+  const [categoriesTwo, setCategoriesTwo] = useState([]);
 
   const configParams = {
     term: "restaurants",
@@ -31,13 +32,13 @@ const App = () => {
     longitude: userLocation?.longitude,    
     sort_by: "best_match",
     limit: 20,
+    categories: categoriesOne.concat(categoriesTwo).filter((element, index, array) => array.indexOf(element) === index).toString(),
     radius: (maxDistanceOne > maxDistanceTwo ? maxDistanceOne : maxDistanceTwo) * 1609,
     price: priceLevelOne !== priceLevelTwo ? `${priceLevelOne}, ${priceLevelTwo}` : priceLevelOne
   };
 
   const [restaurantResults, setRestaurantResults] = useState([]);
 
-  // Example working API call. We can work off of this base.
   const config = {
     headers: {
       Authorization:
@@ -45,7 +46,7 @@ const App = () => {
     },
     params: configParams,
   };
-  //
+
   const callYelpApi = async () => {
     console.log('callYelpApi:');
     try {
@@ -61,7 +62,6 @@ const App = () => {
       console.error(error);
     }
   };
-  //
 
   const getUserLocation = async () => {
     const success = async (position) => {
@@ -90,26 +90,6 @@ const App = () => {
     getUserLocation();
   }, [])
 
-  useEffect(() => {
-    console.log('maxDistanceOne: ');
-    console.log(maxDistanceOne);
-  }, [maxDistanceOne]);
-
-  useEffect(() => {
-    console.log('maxDistanceTwo: ');
-    console.log(maxDistanceTwo);
-  }, [maxDistanceTwo]);
-
-  useEffect(() => {
-    console.log('priceLevelOne: ');
-    console.log(priceLevelOne);
-  }, [priceLevelOne]);
-
-  useEffect(() => {
-    console.log('priceLevelTwo: ');
-    console.log(priceLevelTwo);
-  }, [priceLevelTwo]);
-
   return (
     <Grid
       container
@@ -125,7 +105,8 @@ const App = () => {
               <CoupleYelp
                 callYelpApi={callYelpApi}
                 restaurantResults={restaurantResults}
-                setCategories={setCategories}
+                setCategoriesOne={setCategoriesOne}
+                setCategoriesTwo={setCategoriesTwo}
                 setMaxDistanceOne={setMaxDistanceOne}
                 setPriceLevelOne={setPriceLevelOne}
                 setMaxDistanceTwo={setMaxDistanceTwo}
