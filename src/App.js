@@ -1,7 +1,7 @@
 import './App.css';
 import axios from 'axios'
 
-import { Alert, Box, Grid, Snackbar } from '@mui/material';
+import { Alert, Box, Grid, Snackbar, Typography } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -110,6 +110,14 @@ const App = () => {
     getUserLocation();
   }, [])
 
+  const components = {
+    Header() {
+      return (
+        <Typography variant="h3" fontFamily="Pacifico" className="underlined" sx={{ mb: 5 }}>Not sure where to eat?</Typography>
+      );
+    },
+  }
+
   return (
     <Grid
       container
@@ -120,7 +128,7 @@ const App = () => {
       style={{ minHeight: '100vh' }}
     >
       <Grid item sx={{ width: "100%" }}>
-        <Authenticator >
+        <Authenticator components={components}>
           {({ signOut, user }) => (
             <Box>
               <CoupleYelp
