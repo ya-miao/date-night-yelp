@@ -23,7 +23,6 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
     },
   ];
 
-  // const [category, setCategory] = useState('');
   const [features, setFeatures] = useState([
     {
       name: "Rating",
@@ -126,12 +125,39 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
           <CardContent>
             <ThemeProvider theme={theme}>
               <Stack spacing={2}>
+                <Stack spacing={1}>
+                  <Typography>Max Price Level</Typography>
+                  <Box width='50vh'>
+                    <Slider
+                      defaultValue={2}
+                      valueLabelDisplay="auto"
+                      step={1}
+                      marks={marks}
+                      min={1}
+                      max={4}
+                      sx={{ mx: 4 }}
+                      onChange={handlePriceLevelChange}
+                    />
+                  </Box>
+                </Stack>
+                <Stack spacing={1}>
+                  <Typography>Max Distance Away (Miles)</Typography>
+                  <Box width='50vh'>
+                    <Slider
+                      defaultValue={15}
+                      valueLabelDisplay="auto"
+                      min={0}
+                      max={25}
+                      onChange={handleDistanceChange}
+                    />
+                  </Box>
+                </Stack>
               </Stack>
-              {features.map((item, index) => (
+              {/* {features.map((item, index) => (
                 <React.Fragment>
-                  <div draggable droppable onDragStart={e => D_Start(e, index)} onDragEnter={e => D_Enter(e, index)} onDragEnd={e => D_End(e, index)} className="feature-text" style={{backgroundColor: secColor, color: "black"}}>
+                  <div draggable droppable onDragStart={e => D_Start(e, index)} onDragEnter={e => D_Enter(e, index)} onDragEnd={e => D_End(e, index)} className="feature-text" style={{ backgroundColor: secColor, color: "black" }}>
                     <h3>{item.name}</h3>
-                    {item.name == "Cost" ? (
+                    {item.name === "Cost" ? (
                       <Stack spacing={1}>
                         <Typography>Max Price Level</Typography>
                         <Box width='50vh'>
@@ -148,7 +174,7 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
                         </Box>
                       </Stack>
                     ) :
-                      item.name == "Distance" ? (
+                      item.name === "Distance" ? (
                         <Stack spacing={1}>
                           <Typography>Max Distance Away (Miles)</Typography>
                           <Box width='50vh'>
@@ -162,7 +188,7 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
                           </Box>
                         </Stack>
                       ) :
-                        item.name == "Rating" ? (
+                        item.name === "Rating" ? (
                           <></>
                         )
                           :
@@ -170,7 +196,7 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
                   </div>
                   {item.isDragging ? <div className="drag-indicator"></div> : null}
                 </React.Fragment>
-              ))}
+              ))} */}
             </ThemeProvider>
           </CardContent>
         </Card>

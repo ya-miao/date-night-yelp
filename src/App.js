@@ -15,19 +15,24 @@ Amplify.configure(awsExports);
 
 const App = () => {
 
-  const [maxDistance, setMaxDistance] = useState(15);
-  const [category, setCategory] = useState('');
-  const [priceLevel, setPriceLevel] = useState(2);
   const [userLocation, setUserLocation] = useState([]);
+
+  const [maxDistanceOne, setMaxDistanceOne] = useState(15);
+  const [priceLevelOne, setPriceLevelOne] = useState(2);
+
+  const [maxDistanceTwo, setMaxDistanceTwo] = useState(10);
+  const [priceLevelTwo, setPriceLevelTwo] = useState(3);
+
+  const [category, setCategory] = useState('');
 
   const configParams = {
     term: "restaurants",
     latitude: userLocation?.latitude,    
     longitude: userLocation?.longitude,    
     sort_by: "best_match",
-    limit: 10,
-    radius: maxDistance * 1609,
-    price: priceLevel
+    limit: 20,
+    radius: (maxDistanceOne > maxDistanceTwo ? maxDistanceOne : maxDistanceTwo) * 1609,
+    price: `${priceLevelOne}, ${priceLevelTwo}`
   };
 
   const [restaurantResults, setRestaurantResults] = useState([]);
@@ -81,16 +86,6 @@ const App = () => {
   }, [restaurantResults, userLocation])
 
   useEffect(() => {
-    console.log('priceLevel: ');
-    console.log(priceLevel);
-  }, [priceLevel])
-
-  useEffect(() => {
-    console.log('maxDistance: ');
-    console.log(maxDistance);
-  }, [maxDistance])
-
-  useEffect(() => {
     getUserLocation();
   }, [])
 
@@ -106,7 +101,7 @@ const App = () => {
         <Authenticator >
           {({ signOut, user }) => (
             <Box>
-              <CoupleYelp callYelpApi={callYelpApi} restaurantResults={restaurantResults} setMaxDistance={setMaxDistance} setCategory={setCategory} setPriceLevel={setPriceLevel} location={userLocation}/>
+              <CoupleYelp callYelpApi={callYelpApi} restaurantResults={restaurantResults} setCategory={setCategory} setMaxDistanceOne={setMaxDistanceOne} setPriceLevelOne={setPriceLevelOne} setMaxDistanceTwo={setMaxDistanceTwo} setPriceLevelTwo={setPriceLevelTwo} location={userLocation}/>
             </Box>
           )}
         </Authenticator>
