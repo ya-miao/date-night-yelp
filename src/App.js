@@ -112,6 +112,7 @@ const App = () => {
                 setMaxDistanceTwo={setMaxDistanceTwo}
                 setPriceLevelTwo={setPriceLevelTwo}
                 location={userLocation}
+                getUserLocation={getUserLocation}
               />
             </Box>
           )}

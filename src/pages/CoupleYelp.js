@@ -11,7 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import ResultsDialog from '../components/ResultsDialog';
 
-const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCategoriesTwo, setMaxDistanceOne, setPriceLevelOne, setMaxDistanceTwo, setPriceLevelTwo, location }) => {
+const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCategoriesTwo, setMaxDistanceOne, setPriceLevelOne, setMaxDistanceTwo, setPriceLevelTwo, location, getUserLocation }) => {
   const signOut = async () => {
     try {
       await Auth.signOut();
@@ -21,8 +21,8 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
   }
 
   const [openResults, setOpenResults] = useState(false);
-  const [user1Name, setUser1Name] = useState("");
-  const [user2Name, setUser2Name] = useState("");
+  const [user1Name, setUser1Name] = useState("Person 1");
+  const [user2Name, setUser2Name] = useState("Person 2");
   const [open, setOpen] = useState(true);
 
   const handleCloseResults = () => {
@@ -40,7 +40,7 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
         open={open}
         onClose={handleClose}
       >
-        <DialogTitle>Please input your names</DialogTitle>
+        <DialogTitle>Who can't decide what to eat?</DialogTitle>
         <DialogContent>
           <Stack spacing={10} direction="row">
             <TextField id="standard-basic" label="Person 1" variant="standard" onChange={e => setUser1Name(e.target.value)}/>
@@ -62,8 +62,13 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
       <Stack alignItems='center' justifyContent='center' mt={2}>
         <img src={DiningSvg} alt="Your SVG" className='dining-image' />
         <Stack direction="column" mt={2} className='white-container' padding={4} bgcolor="white" alignItems="center" alignContent="center">
-          <Typography variant="h3" fontFamily="Pacifico" className="underlined">Not sure where to eat?</Typography>
-          <Box direction="row" mt={5}>
+          <Stack spacing={3} alignItems="center" alignContent="center">
+            <Typography variant="h3" fontFamily="Pacifico" className="underlined">Not sure where to eat?</Typography>
+            <Button onClick={() => setOpen(true)} variant='outlined' size='small'>
+              <Typography variant="overline">Who can't decide?</Typography>
+            </Button>
+          </Stack>
+          <Box direction="row" mt={1}>
             <Grid container spacing={3}>
               <Grid item xs={6}>
                 <PreferenceCard oneUser={user1Name} mainColor="#A64AC9" secColor="#eecdfb"
@@ -84,7 +89,6 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
           className='find-resturants-button'
           onClick={() => {
             setOpenResults(true);
-            // API call runs here
             callYelpApi();
           }}
         >
