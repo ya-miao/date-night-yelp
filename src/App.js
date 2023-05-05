@@ -11,6 +11,7 @@ import '@aws-amplify/ui-react/styles.css';
 
 import awsExports from './aws-exports';
 import { useEffect, useState } from 'react';
+import { useResolvedPath } from 'react-router-dom';
 Amplify.configure(awsExports);
 
 const App = () => {
@@ -38,7 +39,8 @@ const App = () => {
     price: priceLevelOne !== priceLevelTwo ? `${priceLevelOne}, ${priceLevelTwo}` : priceLevelOne
   };
 
-  const [restaurantResults, setRestaurantResults] = useState([]);
+  const [winnerRestaurant, setWinnerRestaurant] = useState({});
+  const [suggestionRestaurants, setSuggetstionRestaurants] = useState([]);
 
   const config = {
     headers: {
@@ -93,10 +95,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log('restaurantResults: ');
-    console.log(restaurantResults);
+    
     console.log(userLocation, "userLocation");
-  }, [restaurantResults, userLocation])
+  }, [winnerRestaurant, suggestionRestaurants, userLocation])
 
   useEffect(() => {
     console.log('userLocation');
@@ -118,7 +119,8 @@ const App = () => {
             <Box>
               <CoupleYelp
                 callYelpApi={callYelpApi}
-                restaurantResults={restaurantResults}
+                winnerRestaurant={winnerRestaurant}
+                suggestionRestaurants={suggestionRestaurants}
                 setCategoriesOne={setCategoriesOne}
                 setCategoriesTwo={setCategoriesTwo}
                 setMaxDistanceOne={setMaxDistanceOne}
