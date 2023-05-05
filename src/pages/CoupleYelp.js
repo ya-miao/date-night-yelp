@@ -30,7 +30,7 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setMaxDistance, setCategor
     <Stack mb={4}>
       <Stack direction='row' justifyContent='space-between' sx={{ backgroundColor: "#28282B", padding: "0.5rem 2rem"}}>
         <Stack direction='row' alignItems='center' justifyContent='center' gap={0.5}>
-          <Typography style={{color: "white", fontWeight: "bold"}}>Current Location: <span style={{color: "orange"}}>{location.principalSubdivision}</span></Typography>
+          <Typography style={{color: "white", fontWeight: "bold"}}>Current Location: <span style={{color: "orange"}}>{location.locality + `, ` + location.principalSubdivision}</span></Typography>
           <PinDropIcon size='small' style={{color: "orange"}}/>
         </Stack>
         <button onClick={signOut} className='signout-btn'
