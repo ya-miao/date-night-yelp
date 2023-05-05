@@ -47,7 +47,7 @@ function func1(restaurant) {
 }
 
 
-const ResultsDialog = ({ handleClose, open, restaurantResults, location }) => {
+const ResultsDialog = ({ handleClose, open, winerResuaurant, suggestionRestaurants, location }) => {
   return (
     <Dialog onClose={handleClose} open={open} fullScreen={true} sx={{ m: 10 }}>
       <DialogTitle>
@@ -60,7 +60,13 @@ const ResultsDialog = ({ handleClose, open, restaurantResults, location }) => {
       </DialogTitle>
       <Box sx={{ flexGrow: 1 }} padding={3}>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-          {restaurantResults?.map((restaurant, index) => (
+          <CardMedia
+            component="img"
+            height="194"
+            image={winerResuaurant?.image_url}
+            alt="Paella dish"
+          />
+          {suggestionRestaurants?.map((restaurant, index) => (
             <Grid item md={4} key={index} justifyContent="center" alignItems="center">
               <Card sx={{ maxWidth: 345 }}>
                 <CardHeader

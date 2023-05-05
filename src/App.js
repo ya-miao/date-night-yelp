@@ -11,6 +11,7 @@ import '@aws-amplify/ui-react/styles.css';
 
 import awsExports from './aws-exports';
 import { useEffect, useState } from 'react';
+import { useResolvedPath } from 'react-router-dom';
 Amplify.configure(awsExports);
 
 const App = () => {
@@ -36,6 +37,8 @@ const App = () => {
   };
 
   const [restaurantResults, setRestaurantResults] = useState([]);
+  const [winerResuaurant, setWinnerRestaurants] = useState({});
+  const [suggestionRestaurants, setSuggetstionRestaurants] = useState([]);
 
   // Example working API call. We can work off of this base.
   const config = {
@@ -52,10 +55,9 @@ const App = () => {
       await axios
         .get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, config)
         .then((response) => {
-          console.log('response: ');
-          console.log(response);
-          setRestaurantResults(response?.data?.businesses);
-          console.log(response?.data?.businesses[0])
+          const restaurants = response?.data?.businesses;
+          setWinnerRestaurants(restaurants.shift());
+          setSuggetstionRestaurants(restaurants);
         });
     } catch (error) {
       console.error(error);
@@ -124,7 +126,8 @@ const App = () => {
             <Box>
               <CoupleYelp
                 callYelpApi={callYelpApi}
-                restaurantResults={restaurantResults}
+                winerResuaurant={winerResuaurant}
+                suggestionRestaurants={suggestionRestaurants}
                 setCategories={setCategories}
                 setMaxDistanceOne={setMaxDistanceOne}
                 setPriceLevelOne={setPriceLevelOne}

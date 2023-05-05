@@ -12,7 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import ResultsDialog from '../components/ResultsDialog';
 
-const CoupleYelp = ({ callYelpApi, restaurantResults, setCategories, setMaxDistanceOne, setPriceLevelOne, setMaxDistanceTwo, setPriceLevelTwo, location }) => {
+const CoupleYelp = ({ callYelpApi, winerResuaurant, suggestionRestaurants, setCategories, setMaxDistanceOne, setPriceLevelOne, setMaxDistanceTwo, setPriceLevelTwo, location }) => {
   const signOut = async () => {
     try {
       await Auth.signOut();
@@ -94,7 +94,8 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategories, setMaxDista
       <ResultsDialog
         open={openResults}
         handleClose={handleCloseResults}
-        restaurantResults={restaurantResults}
+        winerResuaurant={winerResuaurant}
+        suggestionRestaurants={suggestionRestaurants}
         location={location}
       />
     </Stack>
