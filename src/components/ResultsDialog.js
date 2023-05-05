@@ -1,4 +1,4 @@
-import { Dialog, DialogTitle, IconButton, Stack, Typography } from "@mui/material";
+import { Button, Dialog, DialogTitle, IconButton, Stack, Typography } from "@mui/material";
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -56,12 +56,16 @@ const ResultsDialog = ({ handleClose, open, restaurantResults }) => {
                     <GradeIcon size='small' style={{color: "orange", marginLeft: "2px"}}/>
                     </Stack>
                     <Typography><span style={{fontWeight: "bold"}}>Phone:</span> {restaurant?.display_phone}</Typography>
+                    <Typography><span style={{fontWeight: "bold"}}>Price:</span> {restaurant?.price}</Typography>
                   </Stack>
                 </CardContent>
                 <CardActions disableSpacing>
                   <IconButton aria-label="add to favorites">
                     <FavoriteBorderIcon style={{color: "orange"}} />
                   </IconButton>
+                  <a href={restaurant?.url} title={restaurant?.name + ` Yelp Page`} target="_blank">
+                    <Button style={{color: "orange", fontWeight: "bold", marginLeft: "2px"}}>Visit Site</Button>
+                  </a>
                 </CardActions>
               </Card>
             </Grid>
