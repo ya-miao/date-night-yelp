@@ -11,7 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import ResultsDialog from '../components/ResultsDialog';
 
-const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCategoriesTwo, setMaxDistanceOne, setPriceLevelOne, setMaxDistanceTwo, setPriceLevelTwo, location, getUserLocation }) => {
+const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCategoriesTwo, setMaxDistanceOne, setPriceLevelOne, setMaxDistanceTwo, setPriceLevelTwo, location, getUserLocation, userLocation, setOpenSnackbar }) => {
   const signOut = async () => {
     try {
       await Auth.signOut();
@@ -89,8 +89,12 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
         </Stack><button
           className='find-resturants-button'
           onClick={() => {
-            setOpenResults(true);
-            callYelpApi();
+            if (userLocation.length === 0) {
+              setOpenSnackbar(true);
+            } else {
+              setOpenResults(true);
+              callYelpApi();
+            }
           }}
         >
           Find restaurants</button>

@@ -142,6 +142,8 @@ const App = () => {
                 setPriceLevelTwo={setPriceLevelTwo}
                 location={userLocation}
                 getUserLocation={getUserLocation}
+                userLocation={userLocation}
+                setOpenSnackbar={setOpenSnackbar}
               />
               <Snackbar anchorOrigin={{
                 vertical: 'top',
