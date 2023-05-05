@@ -32,7 +32,7 @@ const App = () => {
     sort_by: "best_match",
     limit: 20,
     radius: (maxDistanceOne > maxDistanceTwo ? maxDistanceOne : maxDistanceTwo) * 1609,
-    price: `${priceLevelOne}, ${priceLevelTwo}`
+    price: priceLevelOne !== priceLevelTwo ? `${priceLevelOne}, ${priceLevelTwo}` : priceLevelOne
   };
 
   const [restaurantResults, setRestaurantResults] = useState([]);
