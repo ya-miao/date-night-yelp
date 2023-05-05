@@ -23,7 +23,7 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
   const [openResults, setOpenResults] = useState(false);
   const [user1Name, setUser1Name] = useState("Person 1");
   const [user2Name, setUser2Name] = useState("Person 2");
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleCloseResults = () => {
     setOpenResults(false);

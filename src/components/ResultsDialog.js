@@ -64,7 +64,7 @@ const ResultsDialog = ({ handleClose, open, restaurantResults, location }) => {
           </Stack>
           <Card sx={{ width: 345, margin: "30px 0" }}>
             <CardHeader
-              title="Winner Name"
+              title={restaurantResults[0]?.name}
               style={{ backgroundColor: "#28282B", color: "orange", borderBottom: "2px solid orange" }}
             />
             <CardMedia
