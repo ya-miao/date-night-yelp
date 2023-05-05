@@ -11,7 +11,7 @@ import ResultsDialog from '../components/ResultsDialog';
 
 // Let's add some way for users to input person 1 and person 2
 // We also need to take into account preferences from both person 1 and 2 separately
-const CoupleYelp = ({ callYelpApi, restaurantResults, setMaxDistance, setCategory, setPriceLevel, location }) => {
+const CoupleYelp = ({ callYelpApi, restaurantResults, setCategory, setMaxDistanceOne, setPriceLevelOne, setMaxDistanceTwo, setPriceLevelTwo, location }) => {
   const signOut = async () => {
     try {
       await Auth.signOut();
@@ -30,12 +30,7 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setMaxDistance, setCategor
     <Stack mb={4}>
       <Stack direction='row' justifyContent='space-between' sx={{ backgroundColor: "#28282B", padding: "0.5rem 2rem"}}>
         <Stack direction='row' alignItems='center' justifyContent='center' gap={0.5}>
-          <Typography style={{color: "white", fontWeight: "bold"}}>Current Location: <span style={{color: "orange"}}>{location.principalSubdivision}</span></Typography>
-          {/* <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="15" height="15" viewBox="0 0 24 24" stroke-width="1.5" stroke={orange[500]} fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <circle cx="12" cy="11" r="3" />
-            <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
-          </svg> */}
+          <Typography style={{color: "white", fontWeight: "bold"}}>Current Location: <span style={{color: "orange"}}>{location.locality + `, ` + location.principalSubdivision}</span></Typography>
           <PinDropIcon size='small' style={{color: "orange"}}/>
         </Stack>
         <button onClick={signOut} className='signout-btn'
@@ -49,20 +44,19 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setMaxDistance, setCategor
             <Grid container spacing={3}>
               <Grid item xs={6}>
                 <PreferenceCard oneUser='Person One' mainColor="#A64AC9" secColor="#eecdfb"
-                  setMaxDistance={setMaxDistance}
                   setCategory={setCategory}
-                  setPriceLevel={setPriceLevel} />
+                  setMaxDistance={setMaxDistanceOne}
+                  setPriceLevel={setPriceLevelOne} />
               </Grid>
               <Divider></Divider>
               <Grid item xs={6}>
                 <PreferenceCard oneUser='Person Two' mainColor="#473890" secColor="#d7cffc"
-                  setMaxDistance={setMaxDistance}
                   setCategory={setCategory}
-                  setPriceLevel={setPriceLevel} />
+                  setMaxDistance={setMaxDistanceTwo}
+                  setPriceLevel={setPriceLevelTwo} />
               </Grid>
             </Grid>
           </Box>
-
         </Stack><button
           className='find-resturants-button'
           onClick={() => {
