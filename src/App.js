@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import CoupleYelp from './pages/CoupleYelp';
 
-import yelpApiKey from './yelp-apikey.json';
+import yelpApi from './yelp-api.json';
 
 import { Amplify } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
@@ -49,7 +49,7 @@ const App = () => {
   const config = {
     headers: {
       Authorization:
-        `Bearer ${yelpApiKey?.apikey}`,
+        `Bearer ${yelpApi?.apiKey}`,
       },
     params: configParams,
   };
@@ -61,7 +61,7 @@ const App = () => {
       setOpenBackdrop(true);
       try {
         await axios
-          .get(`${'https://lighthall-dateyelp-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, config)
+          .get(`${yelpApi?.corsServer}https://api.yelp.com/v3/businesses/search`, config)
           .then((response) => {
             setRestaurantResults(response?.data?.businesses);
             console.log(response?.data?.businesses[0])
