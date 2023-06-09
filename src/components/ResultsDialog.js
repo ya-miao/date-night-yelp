@@ -42,10 +42,6 @@ function deg2rad(deg) {
   return deg * (Math.PI / 180);
 }
 
-function func1(restaurant) {
-  console.log("restaurant: " + JSON.stringify(restaurant));
-}
-
 const ResultsDialog = ({ handleClose, open, restaurantResults, location }) => {
   return (
     <Dialog onClose={handleClose} open={open} fullScreen={true} sx={{ m: 4 }}>

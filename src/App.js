@@ -7,6 +7,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import CoupleYelp from './pages/CoupleYelp';
 
+import yelpApiKey from './yelp-apikey.json';
+
 import { Amplify } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
@@ -47,13 +49,12 @@ const App = () => {
   const config = {
     headers: {
       Authorization:
-        "Bearer KNMAWkmyDKUpkTY7xuFS4bXpVgWS9uunqKuhBlfEw9mn4BOjrfNl1nDeSJphPP9LIsbGXMWCjjBX1S3EJtuhR4ackXwAB5Re_A2O0ZYP1lNFQ-SQJ5l2gjVCsTFQZHYx",
-    },
+        `Bearer ${yelpApiKey?.apikey}`,
+      },
     params: configParams,
   };
 
   const callYelpApi = async () => {
-    console.log('callYelpApi:');
     if (userLocation.length === 0) {
       setOpenSnackbar(true);
     } else {
@@ -62,8 +63,6 @@ const App = () => {
         await axios
           .get(`${'https://lighthall-dateyelp-cors.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, config)
           .then((response) => {
-            console.log('response: ');
-            console.log(response);
             setRestaurantResults(response?.data?.businesses);
             console.log(response?.data?.businesses[0])
           });
@@ -99,14 +98,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log('restaurantResults: ');
-    console.log(restaurantResults);
-    console.log(userLocation, "userLocation");
-  }, [restaurantResults, userLocation])
-
-  useEffect(() => {
-    console.log('userLocation');
-    console.log(userLocation);
     getUserLocation();
   }, [])
 
