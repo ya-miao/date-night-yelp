@@ -1,6 +1,6 @@
 # Date Night Yelp
 
-Hackathon speedrun developed.
+Originally speedrun developed for a hackathon.
 
 ## Overview
 
