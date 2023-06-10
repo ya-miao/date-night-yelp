@@ -161,25 +161,27 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
   }
 
   return (
-    <Box sx={{ width: '75vh' }}>
-      <Stack sx={{ mx: 2 }}>
-        <Stack direction='row' alignItems='center' justifyContent='center' gap={1}>
-          <Typography fontWeight="bold" variant="h6">{oneUser}</Typography>
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke={mainColor} fill={secColor} stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <circle cx="12" cy="12" r="9" />
-            <circle cx="12" cy="10" r="3" />
-            <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
-          </svg>
-        </Stack>
-        <Card style={{ backgroundColor: mainColor, color: "white" }}>
-          <CardContent>
-            <ThemeProvider theme={theme}>
-              <Stack spacing={2}>
-                <div className="feature-text" style={{ backgroundColor: secColor, color: "black" }}>
-                  <Stack spacing={1}>
-                    <Typography>Max Price Level</Typography>
-                    <Box width='50vh'>
+    // <Box sx={{ width: '75vh' }}>
+    <Card>
+      <CardContent>
+        <Stack sx={{ mx: 2 }}>
+          <Stack direction='row' alignItems='center' justifyContent='center' spacing={2}>
+            <Typography fontWeight="bold" variant="h6">{oneUser}</Typography>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke={mainColor} fill={secColor} stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="12" cy="12" r="9" />
+              <circle cx="12" cy="10" r="3" />
+              <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+            </svg>
+          </Stack>
+          <Card style={{ backgroundColor: mainColor, color: "white" }}>
+            <CardContent>
+              <ThemeProvider theme={theme}>
+                <Stack spacing={2}>
+                  <div className="feature-text" style={{ backgroundColor: secColor, color: "black" }}>
+                    <Stack spacing={1}>
+                      <Typography>Max Price Level</Typography>
+                      {/* <Box width='50vh'> */}
                       <Slider
                         defaultValue={2}
                         valueLabelDisplay="auto"
@@ -190,14 +192,13 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
                         sx={{ mx: 4 }}
                         onChange={handlePriceLevelChange}
                       />
-                    </Box>
-                  </Stack>
-                </div>
-
-                <div className="feature-text" style={{ backgroundColor: secColor, color: "black" }}>
-                  <Stack spacing={1}>
-                    <Typography>Max Distance Away (Miles)</Typography>
-                    <Box width='50vh'>
+                      {/* </Box> */}
+                    </Stack>
+                  </div>
+                  <div className="feature-text" style={{ backgroundColor: secColor, color: "black" }}>
+                    <Stack spacing={1}>
+                      <Typography>Max Distance Away (Miles)</Typography>
+                      {/* <Box width='50vh'> */}
                       <Slider
                         defaultValue={15}
                         valueLabelDisplay="auto"
@@ -205,130 +206,132 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
                         max={25}
                         onChange={handleDistanceChange}
                       />
-                    </Box>
-                  </Stack>
-                </div>
-                <div className="feature-text" style={{ backgroundColor: secColor, color: "black" }}>
-                  <Stack spacing={1}>
-                    <Typography>Categories</Typography>
-                    <Box sx={{ display: 'flex' }}>
-                      <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-                        <FormGroup>
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={breakfast_brunch} onChange={handleCheckChange} name="breakfast_brunch" />
-                            }
-                            label="Breakfast, Brunch"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={burgers} onChange={handleCheckChange} name="burgers" />
-                            }
-                            label="Burgers"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={chinese} onChange={handleCheckChange} name="chinese" />
-                            }
-                            label="Chinese"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={french} onChange={handleCheckChange} name="french" />
-                            }
-                            label="French"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={greek} onChange={handleCheckChange} name="greek" />
-                            }
-                            label="Greek"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={hotpot} onChange={handleCheckChange} name="hotpot" />
-                            }
-                            label="Hotpot"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={italian} onChange={handleCheckChange} name="italian" />
-                            }
-                            label="Italian"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={japanese} onChange={handleCheckChange} name="japanese" />
-                            }
-                            label="Japanese"
-                          />
-                        </FormGroup>
-                      </FormControl>
-                      <FormControl
-                        component="fieldset"
-                        sx={{ m: 3 }}
-                        variant="standard"
-                      >
-                        <FormGroup>
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={korean} onChange={handleCheckChange} name="korean" />
-                            }
-                            label="Korean"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={mediterranean} onChange={handleCheckChange} name="mediterranean" />
-                            }
-                            label="Mediterranean"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={mexican} onChange={handleCheckChange} name="mexican" />
-                            }
-                            label="Mexican"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={pizza} onChange={handleCheckChange} name="pizza" />
-                            }
-                            label="Pizza"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={thai} onChange={handleCheckChange} name="thai" />
-                            }
-                            label="Thai"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={vegan} onChange={handleCheckChange} name="vegan" />
-                            }
-                            label="Vegan"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={vegetarian} onChange={handleCheckChange} name="vegetarian" />
-                            }
-                            label="Vegetarian"
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox checked={vietnamese} onChange={handleCheckChange} name="vietnamese" />
-                            }
-                            label="Vietnamese"
-                          />
-                        </FormGroup>
-                      </FormControl>
-                    </Box>
-                  </Stack>
-                </div>
-              </Stack>
-            </ThemeProvider>
-          </CardContent>
-        </Card>
-      </Stack>
-    </Box>
+                      {/* </Box> */}
+                    </Stack>
+                  </div>
+                  <div className="feature-text" style={{ backgroundColor: secColor, color: "black" }}>
+                    <Stack spacing={1}>
+                      <Typography>Categories</Typography>
+                      <Box sx={{ display: 'flex' }}>
+                        <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+                          <FormGroup>
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={breakfast_brunch} onChange={handleCheckChange} name="breakfast_brunch" />
+                              }
+                              label="Breakfast, Brunch"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={burgers} onChange={handleCheckChange} name="burgers" />
+                              }
+                              label="Burgers"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={chinese} onChange={handleCheckChange} name="chinese" />
+                              }
+                              label="Chinese"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={french} onChange={handleCheckChange} name="french" />
+                              }
+                              label="French"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={greek} onChange={handleCheckChange} name="greek" />
+                              }
+                              label="Greek"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={hotpot} onChange={handleCheckChange} name="hotpot" />
+                              }
+                              label="Hotpot"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={italian} onChange={handleCheckChange} name="italian" />
+                              }
+                              label="Italian"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={japanese} onChange={handleCheckChange} name="japanese" />
+                              }
+                              label="Japanese"
+                            />
+                          </FormGroup>
+                        </FormControl>
+                        <FormControl
+                          component="fieldset"
+                          sx={{ m: 3 }}
+                          variant="standard"
+                        >
+                          <FormGroup>
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={korean} onChange={handleCheckChange} name="korean" />
+                              }
+                              label="Korean"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={mediterranean} onChange={handleCheckChange} name="mediterranean" />
+                              }
+                              label="Mediterranean"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={mexican} onChange={handleCheckChange} name="mexican" />
+                              }
+                              label="Mexican"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={pizza} onChange={handleCheckChange} name="pizza" />
+                              }
+                              label="Pizza"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={thai} onChange={handleCheckChange} name="thai" />
+                              }
+                              label="Thai"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={vegan} onChange={handleCheckChange} name="vegan" />
+                              }
+                              label="Vegan"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={vegetarian} onChange={handleCheckChange} name="vegetarian" />
+                              }
+                              label="Vegetarian"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox checked={vietnamese} onChange={handleCheckChange} name="vietnamese" />
+                              }
+                              label="Vietnamese"
+                            />
+                          </FormGroup>
+                        </FormControl>
+                      </Box>
+                    </Stack>
+                  </div>
+                </Stack>
+              </ThemeProvider>
+            </CardContent>
+          </Card>
+        </Stack>
+      </CardContent>
+    </Card>
+    // </Box>
   );
 }
 
