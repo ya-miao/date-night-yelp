@@ -34,7 +34,7 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
   };
 
   return (
-    <Stack mb={4}>
+    <Box>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -63,45 +63,51 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
         <button onClick={signOut} className='signout-btn'
         >Sign Out</button>
       </Stack>
-      <Stack alignItems='center' justifyContent='center' mt={2}>
-        <img src={DiningSvg} alt="Your SVG" className='dining-image' />
-        {/* <Stack direction="column" mt={2} className='white-container' padding={4} bgcolor="white" alignItems="center" alignContent="center"> */}
-        <Stack direction="column" sx={{ m: 4 }} alignItems="center" justifyContent="center" spacing={1}>
-          <Stack spacing={3} alignItems="center" alignContent="center">
-            <Typography variant="h3" fontFamily="Pacifico" className="underlined">Not sure where to eat?</Typography>
-            <Button onClick={() => setOpen(true)} variant='contained' sx={{ textTransform: 'none' }}>
-              <Typography>Enter Names</Typography>
-            </Button>
-          </Stack>
-          {/* <Box direction="row" mt={1}> */}
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6}>
-                  {/* <PreferenceCard oneUser={user1Name} mainColor="#A64AC9" secColor="#eecdfb" */}
-                  <PreferenceCard oneUser={user1Name} mainColor="#964b4b" secColor="#eecdfb"
-                    setCategories={setCategoriesOne}
-                    setMaxDistance={setMaxDistanceOne}
-                    setPriceLevel={setPriceLevelOne} />
-                </Grid>
-                <Divider></Divider>
-                <Grid item xs={12} md={6}>
-                  <PreferenceCard oneUser={user2Name} mainColor="#4E6D3F" secColor="#d7cffc"
-                    setCategories={setCategoriesTwo}
-                    setMaxDistance={setMaxDistanceTwo}
-                    setPriceLevel={setPriceLevelTwo} />
-                </Grid>
+      {/* <Stack alignItems='center' justifyContent='center' mt={2}> */}
+      <Stack alignItems='center' justifyContent='center' spacing={3}>
+        <Stack alignItems='center' justifyContent='center'>
+          <img src={DiningSvg} alt="Your SVG" className='dining-image' />
+          <Stack direction="column" alignItems="center" justifyContent="center" spacing={4}>
+            <Stack spacing={4} alignItems="center" alignContent="center">
+              <button className='find-resturants-button' onClick={() => setOpen(true)}>
+                <Typography>Enter Names</Typography>
+              </button>
+              <Typography variant="h3" fontFamily="Pacifico" className="underlined">Not sure where to eat?</Typography>
+            </Stack>
+            {/* <Box direction="row" mt={1}> */}
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                {/* <PreferenceCard oneUser={user1Name} mainColor="#A64AC9" secColor="#eecdfb" */}
+                <PreferenceCard oneUser={user1Name} mainColor="#964b4b" secColor="#eecdfb"
+                  setCategories={setCategoriesOne}
+                  setMaxDistance={setMaxDistanceOne}
+                  setPriceLevel={setPriceLevelOne} />
               </Grid>
-        </Stack><button
-          className='find-resturants-button'
-          onClick={() => {
-            if (userLocation.length === 0) {
-              setOpenSnackbar(true);
-            } else {
-              setOpenResults(true);
-              callYelpApi();
-            }
-          }}
-        >
-          Find restaurants</button>
+              <Grid item display={{ xs: 'block', md: 'none' }}>
+                <Divider />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <PreferenceCard oneUser={user2Name} mainColor="#4E6D3F" secColor="#d7cffc"
+                  setCategories={setCategoriesTwo}
+                  setMaxDistance={setMaxDistanceTwo}
+                  setPriceLevel={setPriceLevelTwo} />
+              </Grid>
+            </Grid>
+          </Stack>
+          <button
+            className='find-resturants-button'
+            onClick={() => {
+              if (userLocation.length === 0) {
+                setOpenSnackbar(true);
+              } else {
+                setOpenResults(true);
+                callYelpApi();
+              }
+            }}
+          >
+            Find Restaurants
+          </button>
+        </Stack>
       </Stack>
       <ResultsDialog
         open={openResults}
@@ -109,7 +115,7 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
         restaurantResults={restaurantResults}
         location={location}
       />
-    </Stack>
+    </Box>
   )
 };
 
