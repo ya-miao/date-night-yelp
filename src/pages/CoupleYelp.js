@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Auth } from 'aws-amplify';
-import { Box, Button, Card, CardContent, Divider, Grid, Stack, Typography, TextField } from "@mui/material";
+import { Box, Button, Divider, Fab, Grid, Stack, Typography, TextField } from "@mui/material";
 import DiningSvg from "../images/dining.svg";
 import PreferenceCard from "../components/PreferenceCard";
 import Dialog from '@mui/material/Dialog';
@@ -10,6 +10,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import ResultsDialog from '../components/ResultsDialog';
+
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCategoriesTwo, setMaxDistanceOne, setPriceLevelOne, setMaxDistanceTwo, setPriceLevelTwo, location, getUserLocation, userLocation, setOpenSnackbar }) => {
   const signOut = async () => {
@@ -44,8 +46,6 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
         </DialogTitle>
         <DialogContent>
           <Stack spacing={6} direction="row">
-            {/* <TextField size='small' fontFamily='Poppins' label="Person 1" variant="standard" onChange={e => setUser1Name(e.target.value)} />
-            <TextField size='small' fontFamily='Poppins' label="Person 2" variant="standard" onChange={e => setUser2Name(e.target.value)} /> */}
             <TextField size='small' label="Person 1" variant="standard" onChange={e => setUser1Name(e.target.value)} />
             <TextField size='small' label="Person 2" variant="standard" onChange={e => setUser2Name(e.target.value)} />
           </Stack>
@@ -54,30 +54,36 @@ const CoupleYelp = ({ callYelpApi, restaurantResults, setCategoriesOne, setCateg
           <Button variant='outlined' onClick={handleClose}>Set</Button>
         </DialogActions>
       </Dialog>
-      <Stack direction='row' justifyContent='space-between' sx={{ backgroundColor: "#28282B", padding: "0.5rem 2rem" }}>
-        <Stack direction='row' alignItems='center' justifyContent='center' gap={0.5}>
-          <PinDropIcon size='small' style={{ color: "orange" }} />
-          {/* <Typography style={{ color: "white", fontWeight: "bold" }}>Current Location: <span style={{ color: "orange" }}>{location.locality + `, ` + location.principalSubdivision}</span></Typography> */}
-          <Typography style={{ color: "white", fontWeight: "bold" }}><span style={{ color: "orange" }}>{location.locality + `, ` + location.principalSubdivision}</span></Typography>
+      <Box sx={{ backgroundColor: "#28282B" }}>
+        <Stack direction='row' justifyContent='space-between'>
+          <Stack direction='row' alignItems='center' justifyContent='center' gap={0.5}>
+            <PinDropIcon size='small' style={{ color: "orange" }} />
+            <Typography style={{ color: "white", fontWeight: "bold" }}><span style={{ color: "orange" }}>{location.locality + `, ` + location.principalSubdivision}</span></Typography>
+          </Stack>
+          <Fab size='small' onClick={signOut} sx={{ m: 1 }}>
+            <LogoutIcon fontSize='small' />
+          </Fab>
         </Stack>
-        <button onClick={signOut} className='signout-btn'
-        >Sign Out</button>
-      </Stack>
-      {/* <Stack alignItems='center' justifyContent='center' mt={2}> */}
-      <Stack alignItems='center' justifyContent='center' spacing={3}>
+      </Box>
+      <Stack alignItems='center' justifyContent='center' spacing={4}>
         <Stack alignItems='center' justifyContent='center'>
           <img src={DiningSvg} alt="Your SVG" className='dining-image' />
-          <Stack direction="column" alignItems="center" justifyContent="center" spacing={4}>
+          <Stack direction="column" alignItems="center" justifyContent="center" spacing={3}>
             <Stack spacing={4} alignItems="center" alignContent="center">
+              <Grid container>
+                <Grid item display={{ xs: 'none', sm: 'block' }}>
+                  <Typography variant="h3" fontFamily="Pacifico" className="underlined">Not sure where to eat?</Typography>
+                </Grid>
+                <Grid item display={{ xs: 'block', sm: 'none' }}>
+                  <Typography variant="h4" fontFamily="Pacifico" className="underlined">Not sure where to eat?</Typography>
+                </Grid>
+              </Grid>
               <button className='find-resturants-button' onClick={() => setOpen(true)}>
                 <Typography>Enter Names</Typography>
               </button>
-              <Typography variant="h3" fontFamily="Pacifico" className="underlined">Not sure where to eat?</Typography>
             </Stack>
-            {/* <Box direction="row" mt={1}> */}
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
-                {/* <PreferenceCard oneUser={user1Name} mainColor="#A64AC9" secColor="#eecdfb" */}
                 <PreferenceCard oneUser={user1Name} mainColor="#964b4b" secColor="#eecdfb"
                   setCategories={setCategoriesOne}
                   setMaxDistance={setMaxDistanceOne}

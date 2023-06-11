@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Box, Card, CardContent, Checkbox, FormControlLabel, FormGroup, InputLabel, MenuItem, FormControl, Select, Slider, Stack, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Card, CardContent, Checkbox, FormControlLabel, FormGroup, FormControl, Slider, Stack, Typography } from "@mui/material";
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { orange } from '@mui/material/colors';
@@ -112,58 +112,7 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
     },
   });
 
-  let featureItemDrag = useRef()
-  let featureItemDragOver = useRef()
-
-  function D_Start(e, index) {
-    featureItemDrag.current = index;
-  }
-
-  function D_Enter(e, index) {
-    featureItemDragOver.current = index
-
-    const cpArr = [...features]
-
-    let finalArr = []
-
-    cpArr.forEach(item => {
-      finalArr.push({
-        name: item.name,
-        isDragging: false
-      })
-    })
-
-    finalArr[index].isDragging = true;
-
-    setFeatures(finalArr);
-  }
-
-  function D_End(e, index) {
-    const arr1 = [...features]
-
-    const feature_item_main = arr1[featureItemDrag.current]
-    arr1.splice(featureItemDrag.current, 1)
-    arr1.splice(featureItemDragOver.current, 0, feature_item_main)
-
-    featureItemDrag.current = null;
-    featureItemDragOver.current = null;
-
-    let f_arr = []
-
-    arr1.forEach(item => {
-      f_arr.push({
-        name: item.name,
-        isDragging: false
-      })
-    })
-
-    setFeatures(f_arr);
-  }
-
   return (
-    // <Box sx={{ width: '75vh' }}>
-    // <Card>
-    //   <CardContent>
     <Stack sx={{ mx: 2 }} spacing={1.5}>
       <Stack direction='row' alignItems='center' justifyContent='center' spacing={1}>
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke={mainColor} fill={secColor} stroke-linecap="round" stroke-linejoin="round">
@@ -182,16 +131,16 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
                 <Stack spacing={1}>
                   <Typography>Max Price Level</Typography>
                   <Box display='flex' sx={{ m: 1 }}>
-                  <Slider
-                    defaultValue={2}
-                    valueLabelDisplay="auto"
-                    step={1}
-                    marks={marks}
-                    min={1}
-                    max={4}
-                    sx={{ mx: 4 }}
-                    onChange={handlePriceLevelChange}
-                  />
+                    <Slider
+                      defaultValue={2}
+                      valueLabelDisplay="auto"
+                      step={1}
+                      marks={marks}
+                      min={1}
+                      max={4}
+                      sx={{ mx: 4 }}
+                      onChange={handlePriceLevelChange}
+                    />
                   </Box>
                 </Stack>
               </div>
@@ -199,13 +148,13 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
                 <Stack spacing={1}>
                   <Typography>Max Distance Away (Miles)</Typography>
                   <Box display='flex' sx={{ m: 1 }}>
-                  <Slider
-                    defaultValue={15}
-                    valueLabelDisplay="auto"
-                    min={0}
-                    max={25}
-                    onChange={handleDistanceChange}
-                  />
+                    <Slider
+                      defaultValue={15}
+                      valueLabelDisplay="auto"
+                      min={0}
+                      max={25}
+                      onChange={handleDistanceChange}
+                    />
                   </Box>
                 </Stack>
               </div>
@@ -329,9 +278,6 @@ const PreferenceCard = ({ oneUser, mainColor, secColor, setMaxDistance, setCateg
         </CardContent>
       </Card>
     </Stack>
-    //   </CardContent>
-    // </Card>
-    // </Box>
   );
 }
 

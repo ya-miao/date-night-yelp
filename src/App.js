@@ -66,7 +66,6 @@ const App = () => {
           .get(`${yelpApi?.corsServer}https://api.yelp.com/v3/businesses/search`, config)
           .then((response) => {
             setRestaurantResults(response?.data?.businesses);
-            console.log(response?.data?.businesses[0])
           });
       } catch (error) {
         console.error(error);
@@ -113,90 +112,68 @@ const App = () => {
 
   const siteTheme = createTheme({
     palette: {
-      // primary: {
-      //   main: '#9a3a3a',
-      // },
+      primary: {
+        main: '#9a3a3a',
+      },
       secondary: {
         main: '#ffb030',
-        // main: '#9a3a3a',
       },
-      // // divider: '#964d4d',
-      // divider: '#a74d4e',
     },
     typography: {
       fontFamily: 'Montserrat',
-      // fontFamily: 'Maven Pro',
-      // h1: {
-      //   fontFamily: 'Jura',
-      // },
-      // h2: {
-      //   fontFamily: 'Jura',
-      // },
-      // h3: {
-      //   fontFamily: 'Jura',
-      // },
-      // h4: {
-      //   fontFamily: 'Jura',
-      // },
-      // h5: {
-      //   fontFamily: 'Jura',
-      // },
-      h6: {
-        fontFamily: 'Montserrat',
-      },
-      // caption: {
-      //   fontFamily: 'Jura',
     },
   },
   );
 
   return (
     <ThemeProvider theme={siteTheme}>
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        style={{ minHeight: '100vh' }}
-      >
-        <Grid item sx={{ width: "100%" }}>
-          <Authenticator components={components}>
-            {({ signOut, user }) => (
-              <Box>
-                <CoupleYelp
-                  callYelpApi={callYelpApi}
-                  restaurantResults={restaurantResults}
-                  setCategoriesOne={setCategoriesOne}
-                  setCategoriesTwo={setCategoriesTwo}
-                  setMaxDistanceOne={setMaxDistanceOne}
-                  setPriceLevelOne={setPriceLevelOne}
-                  setMaxDistanceTwo={setMaxDistanceTwo}
-                  setPriceLevelTwo={setPriceLevelTwo}
-                  location={userLocation}
-                  getUserLocation={getUserLocation}
-                  userLocation={userLocation}
-                  setOpenSnackbar={setOpenSnackbar}
-                />
-                <Snackbar anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'center'
-                }} open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-                  <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
-                    Allow access to your location to get recommendations.
-                  </Alert>
-                </Snackbar>
-                <Backdrop
-                  sx={{ color: '#fff', zIndex: 2000 }}
-                  open={openBackdrop}
-                >
-                  <CircularProgress color="inherit" sx={{ zIndex: 2001 }} />
-                </Backdrop>
-              </Box>
-            )}
-          </Authenticator>
+      <Box sx={{ mb: 4 }}>
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          style={{ minHeight: '100vh' }}
+        >
+          <Grid item sx={{ width: "100%" }}>
+            <Authenticator components={components}>
+              {({ signOut, user }) => (
+                <Box>
+                  <CoupleYelp
+                    callYelpApi={callYelpApi}
+                    restaurantResults={restaurantResults}
+                    setCategoriesOne={setCategoriesOne}
+                    setCategoriesTwo={setCategoriesTwo}
+                    setMaxDistanceOne={setMaxDistanceOne}
+                    setPriceLevelOne={setPriceLevelOne}
+                    setMaxDistanceTwo={setMaxDistanceTwo}
+                    setPriceLevelTwo={setPriceLevelTwo}
+                    location={userLocation}
+                    getUserLocation={getUserLocation}
+                    userLocation={userLocation}
+                    setOpenSnackbar={setOpenSnackbar}
+                  />
+                  <Snackbar anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center'
+                  }} open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+                    <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
+                      Allow access to your location to get recommendations.
+                    </Alert>
+                  </Snackbar>
+                  <Backdrop
+                    sx={{ color: '#fff', zIndex: 2000 }}
+                    open={openBackdrop}
+                  >
+                    <CircularProgress color="inherit" sx={{ zIndex: 2001 }} />
+                  </Backdrop>
+                </Box>
+              )}
+            </Authenticator>
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </ThemeProvider>
   );
 };
